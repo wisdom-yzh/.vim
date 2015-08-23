@@ -1,6 +1,9 @@
 set nocompatible         	" be iMproved, required
 syntax on
 filetype on
+set foldenable
+set foldmethod=indent
+set foldlevelstart=99
 set cul						" 高亮光标所在行
 set shortmess=atI   	 	" 启动的时候不显示那个援助乌干达儿童的提示
 color darkblue
@@ -35,6 +38,7 @@ let g:mapleader = ','
 
 " 透明背景
 hi Normal ctermbg=NONE
+hi Folded ctermbg=NONE ctermfg=3
 hi VertSplit ctermfg=gray ctermbg=NONE
 highlight Comment ctermfg=2 guifg=SeaGreen
 
@@ -78,6 +82,9 @@ Plugin 'hallettj/jslint.vim'                " js增强~
 Plugin 'neocomplcache'
 Plugin 'rizzatti/dash.vim'
 Plugin 'shawncplus/phpcomplete.vim'
+
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 " 插件个性化
 
@@ -168,3 +175,7 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>""
 
 " dash 快捷键
 nmap <silent> <leader>d <Plug>DashSearch
+
+" markdown
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
+let g:vim_markdown_folding_disabled=1
