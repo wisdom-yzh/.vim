@@ -42,8 +42,6 @@ highlight Comment ctermfg=2 guifg=SeaGreen
 map <S-Left> :tabp<CR>
 map <S-Right> :tabn<CR>
 
-" php omni补全
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " 插件管理
 " set the runtime path to include Vundle and initialize
@@ -79,6 +77,7 @@ Plugin 'joonty/vdebug'                      " PHP调试~
 Plugin 'hallettj/jslint.vim'                " js增强~
 Plugin 'neocomplcache'
 Plugin 'rizzatti/dash.vim'
+Plugin 'shawncplus/phpcomplete.vim'
 
 " 插件个性化
 
@@ -137,7 +136,7 @@ let g:Powerline_stl_path_style = 'short'
 
 " xdebug调试配置
 let g:vdebug_options = {}
-let g:vdebug_options["port"] = 8008
+let g:vdebug_options["port"] = 9000
 
 " neocompletecache配置
 let g:neocomplcache_enable_at_startup = 1
@@ -148,6 +147,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " Define dictionary. 
 let g:neocomplcache_dictionary_filetype_lists = { 
@@ -163,9 +163,6 @@ let g:neocomplcache_dictionary_filetype_lists = {
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
-let g:neocomplcache_omni_patterns.php = '[^. *\t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 " <TAB>: completion. THIS HAS NO USE WHEN WITH SNIPMATE
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>""
 
