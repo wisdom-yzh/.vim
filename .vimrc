@@ -7,6 +7,7 @@ set foldlevelstart=99
 set cul						" 高亮光标所在行
 set shortmess=atI   	 	" 启动的时候不显示那个援助乌干达儿童的提示
 color darkblue
+set backspace=2
 set helplang=cn
 set encoding=utf-8
 set autoindent				" 自动缩进
@@ -42,6 +43,7 @@ hi Folded ctermbg=NONE ctermfg=3
 hi VertSplit ctermfg=gray ctermbg=NONE
 highlight Comment ctermfg=2 guifg=SeaGreen
 
+
 " tab切换
 map <S-Left> :tabp<CR>
 map <S-Right> :tabn<CR>
@@ -49,7 +51,7 @@ map <S-Right> :tabn<CR>
 
 " 插件管理
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/vundle/
+set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 " let Vundle manage Vundle, required
@@ -71,7 +73,7 @@ Plugin 'delimitMate.vim'					" 括号补全~
 Plugin 'pangloss/vim-javascript'			" JS更好看~
 Plugin 'nono/jquery.vim'					" JQ更好看~
 Plugin 'ianva/vim-youdao-translater'		" 有道词典~
-"Plugin 'vim-pandoc/vim-pandoc-syntax'		" 书写文档~
+Plugin 'vim-pandoc/vim-pandoc-syntax'		" 书写文档~
 "Plugin 'KabbAmine/zeavim.vim'				" 查看Zeal~
 Plugin 'php.vim-for-php5'					" 好写网页~
 Plugin 'mattn/emmet-vim'					" 简写HTML~
@@ -83,8 +85,8 @@ Plugin 'neocomplcache'
 Plugin 'rizzatti/dash.vim'
 Plugin 'shawncplus/phpcomplete.vim'
 
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+"Plugin 'godlygeek/tabular'
+"Plugin 'plasticboy/vim-markdown'
 
 " 插件个性化
 
@@ -156,6 +158,11 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
+" 自动关闭补全窗口
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest
+
+
 " Define dictionary. 
 let g:neocomplcache_dictionary_filetype_lists = { 
     \ 'default' : '', 
@@ -170,12 +177,9 @@ let g:neocomplcache_dictionary_filetype_lists = {
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
+
 " <TAB>: completion. THIS HAS NO USE WHEN WITH SNIPMATE
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>""
 
 " dash 快捷键
 nmap <silent> <leader>d <Plug>DashSearch
-
-" markdown
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
-let g:vim_markdown_folding_disabled=1
