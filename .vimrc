@@ -144,8 +144,15 @@ let g:Powerline_symbols = 'unicode'
 let g:Powerline_stl_path_style = 'short'
 
 " xdebugµ˜ ‘≈‰÷√
+let g:vdebug_keymap = {}
+let g:vdebug_keymap["run"] = '<F5>'
+let g:vdebug_keymap["run_to_cursor"] = "<F6>"
+let g:vdebug_keymap["step_over"] = "<F10>"
+let g:vdebug_keymap["step_into"] = "<F11>"
+let g:vdebug_keymap["step_out"] = "<S-F11>"
+let g:vdebug_keymap["close"] = "<F6>"
 let g:vdebug_options = {}
-let g:vdebug_options["port"] = 9000
+let g:vdebug_options["port"] = 8008
 
 " neocompletecache≈‰÷√
 let g:neocomplcache_enable_at_startup = 1
