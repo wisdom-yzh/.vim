@@ -41,8 +41,10 @@ let g:mapleader = ','
 hi Normal ctermbg=NONE
 hi Folded ctermbg=NONE ctermfg=3
 hi VertSplit ctermfg=gray ctermbg=NONE
-highlight Comment ctermfg=2 guifg=SeaGreen
-
+hi Comment ctermfg=2
+hi Pmenu    ctermfg=0 ctermbg=7
+hi Underlined ctermfg=6
+"highlight PmenuSel ctermfg=1 ctermbg=6
 
 " tab切换
 map <S-Left> :tabp<CR>
@@ -95,13 +97,15 @@ vnoremap <silent> <C-T> <Esc>:Ydv<CR>
 nnoremap <silent> <C-T> <Esc>:Ydc<CR>
 noremap <leader>yd :Yde<CR>
 
-" 文件列表查看
-map <F3> <plug>NERDTreeTabsToggle<CR>
-
 " 函数列表查看
 let g:Tlist_Show_One_File = 1
 let g:Tlist_Use_Right_Window = 1
-map <F9> :TlistToggle<CR>
+let g:Tlist_Use_Horiz_Window = 0
+let g:Tlist_Enable_Fold_Column = 0
+
+" 文件列表查看
+map <F3> <plug>NERDTreeTabsToggle<CR> 
+map <F2> :TlistToggle<CR>
 
 " YCM自动补全设置
 let g:ycm_global_ycm_extra_conf =  '~/ycm_extra_conf.py'
@@ -147,10 +151,10 @@ let g:Powerline_stl_path_style = 'short'
 let g:vdebug_keymap = {}
 let g:vdebug_keymap["run"] = '<F5>'
 let g:vdebug_keymap["run_to_cursor"] = "<F6>"
-let g:vdebug_keymap["step_over"] = "<F10>"
-let g:vdebug_keymap["step_into"] = "<F11>"
-let g:vdebug_keymap["step_out"] = "<S-F11>"
-let g:vdebug_keymap["close"] = "<F6>"
+let g:vdebug_keymap["step_over"] = "<F7>"
+let g:vdebug_keymap["step_into"] = "<F8>"
+let g:vdebug_keymap["step_out"] = "<F19>"
+
 let g:vdebug_options = {}
 let g:vdebug_options["port"] = 8008
 
@@ -163,7 +167,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
 " 自动关闭补全窗口
 " au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
