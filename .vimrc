@@ -153,7 +153,7 @@ let g:vdebug_keymap["run"] = '<F5>'
 let g:vdebug_keymap["run_to_cursor"] = "<F6>"
 let g:vdebug_keymap["step_over"] = "<F7>"
 let g:vdebug_keymap["step_into"] = "<F8>"
-let g:vdebug_keymap["step_out"] = "<F19>"
+let g:vdebug_keymap["step_out"] = "<F9>"
 
 let g:vdebug_options = {}
 let g:vdebug_options["port"] = 8008
