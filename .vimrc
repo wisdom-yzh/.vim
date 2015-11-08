@@ -70,8 +70,8 @@ Plugin 'Syntastic'							" 错误提示~
 "Plugin 'bronson/vim-trailing-whitespace'	" 标红空白~
 Plugin 'scrooloose/nerdcommenter'			" 快速注释~
 Plugin 'delimitMate.vim'					" 括号补全~
-"Plugin 'python.vim'							" 写Python~
-"Plugin 'Python-mode-klen'					" 噜Python~
+Plugin 'python.vim'							" 写Python~
+Plugin 'Python-mode-klen'					" 噜Python~
 Plugin 'pangloss/vim-javascript'			" JS更好看~
 Plugin 'nono/jquery.vim'					" JQ更好看~
 Plugin 'ianva/vim-youdao-translater'		" 有道词典~
@@ -108,12 +108,12 @@ map <F3> <plug>NERDTreeTabsToggle<CR>
 map <F2> :TlistToggle<CR>
 
 " YCM自动补全设置
-let g:ycm_global_ycm_extra_conf =  '~/ycm_extra_conf.py'
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_autoclose_preview_window_after_completion = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_confirm_extra_conf = 0
+"let g:ycm_global_ycm_extra_conf =  '~/ycm_extra_conf.py'
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_seed_identifiers_with_syntax = 1
+"let g:ycm_autoclose_preview_window_after_completion = 0
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_confirm_extra_conf = 0
 
 " YCM跳转
 nnoremap <C-F12> :YcmCompleter GoToDefinition<CR>
@@ -121,11 +121,12 @@ nnoremap <F12> :YcmCompleter GoToDeclaration<CR>
 
 " 不用pylint查错,太可怕..
 let g:syntastic_python_checkers = ["pep8", "pyflakes"]
+let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
 
 " YCM报错信息
-nmap <F4> :YcmDiags<CR>
-let g:ycm_error_symbol = '>>'
-let g:ycm_warning_symbol = '>?'
+"nmap <F4> :YcmDiags<CR>
+"let g:ycm_error_symbol = '>>'
+"let g:ycm_warning_symbol = '>?'
 
 " pymode 设置
 let g:pymode_folding = 0
@@ -140,7 +141,6 @@ nmap md :!pandoc -s -S --latexmathml % -o %.html <CR><CR>
 " js配置
 let g:javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 'false'
-
 let g:JSLintHighlightErrorLine = 0
 
 " 状态栏设置
@@ -154,12 +154,63 @@ let g:vdebug_keymap["run_to_cursor"] = "<F6>"
 let g:vdebug_keymap["step_over"] = "<F7>"
 let g:vdebug_keymap["step_into"] = "<F8>"
 let g:vdebug_keymap["step_out"] = "<F9>"
-
 let g:vdebug_options = {}
 let g:vdebug_options["port"] = 8008
 
-" neocompletecache配置
+" phpcomplete enhanced
+let g:phpcomplete_cache_taglists = 1
+let g:phpcomplete_enhance_jump_to_definition = 1
+
+" neocompletecache config
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+" Enable heavy features.
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+let g:neocomplcache_enable_underbar_completion = 1
+
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -167,30 +218,14 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-
-" 自动关闭补全窗口
-" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-" set completeopt=menuone,menu,longest
-
-
-" Define dictionary. 
-let g:neocomplcache_dictionary_filetype_lists = { 
-    \ 'default' : '', 
-    \ 'vimshell' : $HOME.'/.vimshell_hist', 
-    \ 'scheme' : $HOME.'/.gosh_completions', 
-    \ 'css' : $VIMFILES.'/dict/css.dic', 
-    \ 'php' : $VIMFILES.'/dict/php.dic', 
-    \ 'javascript' : $VIMFILES.'/dict/javascript.dic' 
-    \ }
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
-
-" <TAB>: completion. THIS HAS NO USE WHEN WITH SNIPMATE
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>""
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " dash 快捷键
 nmap <silent> <leader>d <Plug>DashSearch
