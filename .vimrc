@@ -82,7 +82,7 @@ Plugin 'mattn/emmet-vim'					" 简写HTML~
 Plugin 'chazy/cscope_maps'                  " 查看调用~
 Plugin 'fugitive.vim'                       " 版本控制~
 Plugin 'joonty/vdebug'                      " PHP调试~
-Plugin 'hallettj/jslint.vim'                " js增强~
+"Plugin 'hallettj/jslint.vim'                " js增强~
 Plugin 'neocomplcache'
 Plugin 'rizzatti/dash.vim'
 Plugin 'shawncplus/phpcomplete.vim'
@@ -226,6 +226,9 @@ endif
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" do not invoke jslint
+let b:did_jslint_plugin = 0
 
 " dash 快捷键
 nmap <silent> <leader>d <Plug>DashSearch
