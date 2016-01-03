@@ -47,8 +47,8 @@ hi Underlined ctermfg=6
 "highlight PmenuSel ctermfg=1 ctermbg=6
 
 " tab切换
-map <S-Left> :tabp<CR>
-map <S-Right> :tabn<CR>
+map <S-p> :tabp<CR>
+map <S-n> :tabn<CR>
 
 
 " 插件管理
@@ -86,6 +86,7 @@ Plugin 'joonty/vdebug'                      " PHP调试~
 Plugin 'neocomplcache'
 Plugin 'rizzatti/dash.vim'
 Plugin 'shawncplus/phpcomplete.vim'
+"Plugin 'phpfolding.vim'
 
 "Plugin 'godlygeek/tabular'
 "Plugin 'plasticboy/vim-markdown'
@@ -144,7 +145,7 @@ let b:javascript_fold = 'false'
 let g:JSLintHighlightErrorLine = 0
 
 " 状态栏设置
-let g:Powerline_symbols = 'unicode'
+let g:Powerline_symbols = 'compatible'
 let g:Powerline_stl_path_style = 'short'
 
 " xdebug调试配置
