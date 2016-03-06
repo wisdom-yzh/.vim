@@ -47,8 +47,8 @@ hi Underlined ctermfg=6
 "highlight PmenuSel ctermfg=1 ctermbg=6
 
 " tabÇĞ»»
-map <S-p> :tabp<CR>
-map <S-n> :tabn<CR>
+map <C-j> :tabp<CR>
+map <C-k> :tabn<CR>
 
 
 " ²å¼ş¹ÜÀí
@@ -145,8 +145,9 @@ let b:javascript_fold = 'false'
 let g:JSLintHighlightErrorLine = 0
 
 " ×´Ì¬À¸ÉèÖÃ
-let g:Powerline_symbols = 'compatible'
+let g:Powerline_symbols = 'unicode'
 let g:Powerline_stl_path_style = 'short'
+let g:Powerline_theme = 'default'
 
 " xdebugµ÷ÊÔÅäÖÃ
 let g:vdebug_keymap = {}
