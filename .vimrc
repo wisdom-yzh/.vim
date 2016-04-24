@@ -1,6 +1,7 @@
 set nocompatible         	" be iMproved, required
 syntax on
 filetype on
+filetype plugin indent on
 set foldenable
 set foldmethod=indent
 set foldlevelstart=99
@@ -43,6 +44,7 @@ hi Folded ctermbg=NONE ctermfg=3
 hi VertSplit ctermfg=gray ctermbg=NONE
 hi Comment ctermfg=2
 hi Pmenu    ctermfg=0 ctermbg=7
+hi PmenuSel ctermfg=7 ctermbg=0
 hi Underlined ctermfg=6
 "highlight PmenuSel ctermfg=1 ctermbg=6
 
@@ -87,7 +89,10 @@ Plugin 'neocomplcache'
 Plugin 'rizzatti/dash.vim'
 Plugin 'shawncplus/phpcomplete.vim'
 "Plugin 'phpfolding.vim'
-
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'tobyS/vmustache'
+Plugin 'tobyS/pdv'
 "Plugin 'godlygeek/tabular'
 "Plugin 'plasticboy/vim-markdown'
 
@@ -117,8 +122,8 @@ map <F2> :TlistToggle<CR>
 "let g:ycm_confirm_extra_conf = 0
 
 " YCM跳转
-nnoremap <C-F12> :YcmCompleter GoToDefinition<CR>
-nnoremap <F12> :YcmCompleter GoToDeclaration<CR>
+"nnoremap <C-F12> :YcmCompleter GoToDefinition<CR>
+"nnoremap <F12> :YcmCompleter GoToDeclaration<CR>
 
 " 不用pylint查错,太可怕..
 let g:syntastic_python_checkers = ["pep8", "pyflakes"]
@@ -154,6 +159,8 @@ let g:vdebug_keymap = {}
 let g:vdebug_keymap["run"] = '<F5>'
 let g:vdebug_keymap["run_to_cursor"] = "<F6>"
 let g:vdebug_keymap["step_over"] = "<F7>"
+let g:vdebug_keymap["step_into"] = "<F8>"
+let g:vdebug_keymap["step_out"] = "<F9>"
 let g:vdebug_keymap["step_into"] = "<F8>"
 let g:vdebug_keymap["step_out"] = "<F9>"
 let g:vdebug_options = {}
@@ -205,7 +212,7 @@ function! s:my_cr_function()
   "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
@@ -234,3 +241,23 @@ let b:did_jslint_plugin = 0
 
 " dash 快捷键
 nmap <silent> <leader>d <Plug>DashSearch
+
+" pdv php-document config
+let g:pdv_template_dir = $HOME . "/.vim/bundle/pdv/templates_snip"
+nnoremap <buffer> <C-l> :call pdv#DocumentWithSnip()<CR>
+
+" Trigger configuration. Do not use <tab> if you use
+au FileType javascript :UltiSnipsAddFiletypes javascript 
+au FileType javascript :UltiSnipsAddFiletypes jquery 
+au FileType javascript :UltiSnipsAddFiletypes json
+au FileType php :UltiSnipsAddFiletypes php 
+au FileType php :UltiSnipsAddFiletypes php-symfony2 
+au FileType php :UltiSnipsAddFiletypes php-phpunit
+au FileType php :UltiSnipsAddFiletypes php-laravel
+au FileType python :UltiSnipsAddFiletypes python
+let g:UltiSnipsSnippetDirectories=['UltiSnips']
+let g:UltiSnipsSnippetsDir = '~/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
