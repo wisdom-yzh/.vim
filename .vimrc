@@ -95,6 +95,7 @@ Plugin 'tobyS/vmustache'
 Plugin 'tobyS/pdv'
 "Plugin 'godlygeek/tabular'
 "Plugin 'plasticboy/vim-markdown'
+Plugin 'ternjs/tern_for_vim'
 
 " 插件个性化
 
