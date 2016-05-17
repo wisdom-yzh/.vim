@@ -162,8 +162,6 @@ let g:vdebug_keymap["run_to_cursor"] = "<F6>"
 let g:vdebug_keymap["step_over"] = "<F7>"
 let g:vdebug_keymap["step_into"] = "<F8>"
 let g:vdebug_keymap["step_out"] = "<F9>"
-let g:vdebug_keymap["step_into"] = "<F8>"
-let g:vdebug_keymap["step_out"] = "<F9>"
 let g:vdebug_options = {}
 let g:vdebug_options["port"] = 8008
 
@@ -225,9 +223,10 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
