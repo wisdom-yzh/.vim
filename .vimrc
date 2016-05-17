@@ -225,7 +225,7 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
@@ -248,8 +248,9 @@ let g:pdv_template_dir = $HOME . "/.vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-l> :call pdv#DocumentWithSnip()<CR>
 
 " Trigger configuration. Do not use <tab> if you use
-au FileType javascript :UltiSnipsAddFiletypes javascript 
-au FileType javascript :UltiSnipsAddFiletypes jquery 
+au FileType javascript :UltiSnipsAddFiletypes javascript
+au FileType javascript :UltiSnipsAddFiletypes javascript-angular
+au FileType javascript :UltiSnipsAddFiletypes javascript-node
 au FileType javascript :UltiSnipsAddFiletypes json
 au FileType php :UltiSnipsAddFiletypes php 
 au FileType php :UltiSnipsAddFiletypes php-symfony2 
