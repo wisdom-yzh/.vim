@@ -225,7 +225,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+" autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " Enable heavy omni completion.
@@ -244,7 +244,7 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 " pdv php-document config
 let g:pdv_template_dir = $HOME . "/.vim/bundle/pdv/templates_snip"
-nnoremap <buffer> <C-l> :call pdv#DocumentWithSnip()<CR>
+nnoremap <C-l> :call pdv#DocumentWithSnip()<CR>
 
 " Trigger configuration. Do not use <tab> if you use
 au FileType javascript :UltiSnipsAddFiletypes javascript
