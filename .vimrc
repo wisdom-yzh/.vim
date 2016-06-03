@@ -14,11 +14,11 @@ set encoding=utf-8
 set autoindent				" 自动缩进
 set cindent					" Tab键的宽度
 set tabstop=4				" 统一缩进为4
-set expandtab				" 空格代替tab
+"set expandtab				" 空格代替tab
 set softtabstop=4
 set shiftwidth=4
 set number		 	        " 显示行号
-set langmenu=zh_CN.UTF-9 	" 语言设置
+set langmenu=zh_CN.UTF-8 	" 语言设置
 set helplang=cn
 set viminfo+=!		 	    " 保存全局变量
 set iskeyword+=_,$,@,%,#,- 	" 带有如下符号的单词不要被换行分割
