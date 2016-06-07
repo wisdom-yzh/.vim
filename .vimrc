@@ -11,12 +11,6 @@ color darkblue
 set backspace=2
 set helplang=cn
 set encoding=utf-8
-set autoindent				" 自动缩进
-set cindent					" Tab键的宽度
-set tabstop=4				" 统一缩进为4
-"set expandtab				" 空格代替tab
-set softtabstop=4
-set shiftwidth=4
 set number		 	        " 显示行号
 set langmenu=zh_CN.UTF-8 	" 语言设置
 set helplang=cn
@@ -34,6 +28,18 @@ set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
 set fileencoding=gb2312
 set termencoding=utf-8
+
+" 设置缩进
+set autoindent				" 自动缩进
+set cindent					" Tab键的宽度
+"set expandtab				" 空格代替tab
+set tabstop=4				" 统一缩进为4
+set softtabstop=4
+set shiftwidth=4
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype phtml setlocal ts=2 sts=2 sw=2
+autocmd Filetype python setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 " leader键位设置
 let g:mapleader = ','
@@ -84,7 +90,7 @@ Plugin 'mattn/emmet-vim'					" 简写HTML~
 Plugin 'chazy/cscope_maps'                  " 查看调用~
 Plugin 'fugitive.vim'                       " 版本控制~
 Plugin 'joonty/vdebug'                      " PHP调试~
-"Plugin 'hallettj/jslint.vim'                " js增强~
+Plugin 'hallettj/jslint.vim'                " js增强~
 Plugin 'neocomplcache'
 Plugin 'rizzatti/dash.vim'
 Plugin 'shawncplus/phpcomplete.vim'
