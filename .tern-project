@@ -9,6 +9,7 @@
   ],
   "plugins": {
       "node": {},
-      "node-express": {}
+      "node-express": {},
+	  "angular": {}
   }
 }
