@@ -44,15 +44,20 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 " leader¼üÎ»ÉèÖÃ
 let g:mapleader = ','
 
+" ÅäÉ«
+"syntax enable
+set background=dark
+colorscheme solarized
+
 " Í¸Ã÷±³¾°
-hi Normal ctermbg=NONE
-hi Folded ctermbg=NONE ctermfg=3
-hi VertSplit ctermfg=gray ctermbg=NONE
-hi Comment ctermfg=2
-hi Pmenu    ctermfg=0 ctermbg=7
-hi PmenuSel ctermfg=7 ctermbg=0
-hi Underlined ctermfg=6
-"highlight PmenuSel ctermfg=1 ctermbg=6
+"hi Normal ctermbg=NONE
+"hi Folded ctermbg=NONE ctermfg=3
+"hi VertSplit ctermfg=gray ctermbg=NONE
+"hi Comment ctermfg=2
+"hi Pmenu    ctermfg=0 ctermbg=7
+"hi PmenuSel ctermfg=7 ctermbg=0
+"hi Underlined ctermfg=6
+"hi PmenuSel ctermfg=1 ctermbg=6
 
 " tabÇĞ»»
 map <C-j> :tabp<CR>
