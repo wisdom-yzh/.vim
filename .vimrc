@@ -71,8 +71,9 @@ call vundle#rc()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/vundle'						" 插件管理~
-"Plugin 'c-standard-functions-highlight'		" 函数高亮~
+Plugin 'c-standard-functions-highlight'		" 函数高亮~
 Plugin 'kien/ctrlp.vim'						" 文件搜索~
+Plugin 'c.vim'							    " c
 Plugin 'scrooloose/nerdtree'				" 文件列表~
 Plugin 'jistr/vim-nerdtree-tabs'			" 列表增强~
 Plugin 'taglist-plus'						" 函数列表~
@@ -124,6 +125,7 @@ let g:Tlist_Enable_Fold_Column = 0
 " 文件列表查看
 map <F3> <plug>NERDTreeTabsToggle<CR> 
 map <F2> :TlistToggle<CR>
+map <F1> :!dot -Tpng % > %.png<CR>
 
 " YCM自动补全设置
 "let g:ycm_global_ycm_extra_conf =  '~/ycm_extra_conf.py'
@@ -154,7 +156,7 @@ let g:pymode_lint_write = 0
 
 " pandoc设置
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=pandoc
-nmap md :!pandoc -s -S --latexmathml % -o %.html <CR><CR>
+nmap md :!pandoc -s -S --latexmathml --listings % -o %.html <CR><CR>
 
 " js配置
 let g:javascript_enable_domhtmlcss = 1
@@ -213,9 +215,6 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
   return neocomplcache#smart_close_popup() . "\<CR>"
   " For no inserting <CR> key.
