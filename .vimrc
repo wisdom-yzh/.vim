@@ -31,10 +31,11 @@ set termencoding=utf-8
 " 设置缩进
 set autoindent				" 自动缩进
 set cindent					" Tab键的宽度
-set expandtab				" 空格代替tab
+"set expandtab				" 空格代替tab
 set tabstop=4				" 统一缩进为4
 set softtabstop=4
 set shiftwidth=4
+set t_ut=
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype phtml setlocal ts=2 sts=2 sw=2
 autocmd Filetype python setlocal ts=2 sts=2 sw=2
@@ -76,7 +77,6 @@ Plugin 'delimitMate.vim'
 Plugin 'python.vim'							
 Plugin 'Python-mode-klen'					
 Plugin 'pangloss/vim-javascript'			
-Plugin 'nono/jquery.vim'					
 Plugin 'ianva/vim-youdao-translater'		
 Plugin 'vim-pandoc/vim-pandoc-syntax'		
 Plugin 'mattn/emmet-vim'					
@@ -92,12 +92,14 @@ Plugin 'honza/vim-snippets'
 Plugin 'tobyS/vmustache'
 Plugin 'tobyS/pdv'
 
-" for js
+" js补全
 Plugin 'ternjs/tern_for_vim'
 
 " for php
 Plugin 'php.vim-for-php5'					
 Plugin 'shawncplus/phpcomplete.vim'
+" for vue
+Plugin 'posva/vim-vue'
 
 " 有道词典翻译
 vnoremap <silent> <C-T> <Esc>:Ydv<CR>
@@ -145,6 +147,9 @@ let g:pymode_warnings = 0
 let g:pymode_rope_completion = 0
 let g:pymode_lint_write = 0
 
+au BufRead,BufNewFile *.{xml,ejs} set ft=html
+au BufRead,BufNewFile *.vue set ft=vue
+
 " pandoc设置
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=pandoc
 nmap md :!pandoc -s -S --latexmathml --listings % -o %.html <CR><CR>
@@ -181,7 +186,6 @@ nmap <silent> <leader>d <Plug>DashSearch
 let g:pdv_template_dir = $HOME . "/.vim/bundle/pdv/templates_snip"
 nnoremap <C-l> :call pdv#DocumentWithSnip()<CR>
 " Trigger configuration. Do not use <tab> if you use
-au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 au FileType javascript :UltiSnipsAddFiletypes javascript
 au FileType javascript :UltiSnipsAddFiletypes javascript-angular
 au FileType javascript :UltiSnipsAddFiletypes javascript-node

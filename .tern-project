@@ -2,10 +2,7 @@
   "libs": [
       "browser",
       "jquery",
-      "ecma5"
-  ],
-  "loadEagerly": [
-      "**/*.js"
+      "ecma6"
   ],
   "plugins": {
       "node": {},
