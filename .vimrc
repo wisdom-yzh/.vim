@@ -62,29 +62,28 @@ call vundle#rc()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/vundle'						
-Plugin 'c-standard-functions-highlight'		
 Plugin 'kien/ctrlp.vim'						
-Plugin 'c.vim'							    
 Plugin 'scrooloose/nerdtree'				
 Plugin 'jistr/vim-nerdtree-tabs'			
-Plugin 'taglist-plus'						
-Plugin 'rosenfeld/conque-term'              
-Plugin 'Lokaltog/vim-powerline'             
-Plugin 'Valloric/YouCompleteMe'		
 Plugin 'Syntastic'							
+Plugin 'Valloric/YouCompleteMe'		
 Plugin 'scrooloose/nerdcommenter'			
+Plugin 'taglist-plus'						
+Plugin 'Lokaltog/vim-powerline'             
+Plugin 'rosenfeld/conque-term'              
 Plugin 'delimitMate.vim'					
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-pandoc/vim-pandoc-syntax'		
+Plugin 'fugitive.vim'
+Plugin 'rizzatti/dash.vim'
+
+" c
+Plugin 'c.vim'							    
+Plugin 'c-standard-functions-highlight'		
+
+" python
 Plugin 'python.vim'							
 Plugin 'Python-mode-klen'					
-Plugin 'pangloss/vim-javascript'			
-Plugin 'ianva/vim-youdao-translater'		
-Plugin 'vim-pandoc/vim-pandoc-syntax'		
-Plugin 'mattn/emmet-vim'					
-Plugin 'chazy/cscope_maps'                  
-Plugin 'fugitive.vim'                       
-Plugin 'joonty/vdebug'                      
-Plugin 'rizzatti/dash.vim'
-Plugin 'altercation/vim-colors-solarized'
 
 " snippets
 Plugin 'SirVer/ultisnips'
@@ -92,19 +91,17 @@ Plugin 'honza/vim-snippets'
 Plugin 'tobyS/vmustache'
 Plugin 'tobyS/pdv'
 
-" js补全
+" frontend
+Plugin 'pangloss/vim-javascript'			
 Plugin 'ternjs/tern_for_vim'
+Plugin 'chazy/cscope_maps'                  
+Plugin 'posva/vim-vue'
+Plugin 'mattn/emmet-vim'					
 
-" for php
+" php
 Plugin 'php.vim-for-php5'					
 Plugin 'shawncplus/phpcomplete.vim'
-" for vue
-Plugin 'posva/vim-vue'
-
-" 有道词典翻译
-vnoremap <silent> <C-T> <Esc>:Ydv<CR>
-nnoremap <silent> <C-T> <Esc>:Ydc<CR>
-noremap <leader>yd :Yde<CR>
+Plugin 'joonty/vdebug'                      
 
 " 函数列表查看
 let g:Tlist_Show_One_File = 1
@@ -129,15 +126,17 @@ let g:ycm_key_list_select_completion = []
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_seed_identifiers_with_syntax = 1
+
 " 跳转
 nnoremap <C-F12> :YcmCompleter GoToDefinition<CR>
 nnoremap <F12> :YcmCompleter GoToDeclaration<CR>
+
 " 报错信息
 nmap <F4> :YcmDiags<CR>
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>?'
 
-" 不用pylint查错,太可怕..
+" syntastic checker
 let g:syntastic_python_checkers = ["pep8", "pyflakes"]
 let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
 
@@ -187,13 +186,8 @@ let g:pdv_template_dir = $HOME . "/.vim/bundle/pdv/templates_snip"
 nnoremap <C-l> :call pdv#DocumentWithSnip()<CR>
 " Trigger configuration. Do not use <tab> if you use
 au FileType javascript :UltiSnipsAddFiletypes javascript
-au FileType javascript :UltiSnipsAddFiletypes javascript-angular
 au FileType javascript :UltiSnipsAddFiletypes javascript-node
-au FileType javascript :UltiSnipsAddFiletypes json
 au FileType php :UltiSnipsAddFiletypes php 
-au FileType php :UltiSnipsAddFiletypes php-symfony2 
-au FileType php :UltiSnipsAddFiletypes php-phpunit
-au FileType php :UltiSnipsAddFiletypes php-laravel
 au FileType python :UltiSnipsAddFiletypes python
 au FileType c :UltiSnipsAddFiletypes c
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
