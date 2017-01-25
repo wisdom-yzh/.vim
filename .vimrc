@@ -31,7 +31,7 @@ set termencoding=utf-8
 " 设置缩进
 set autoindent				" 自动缩进
 set cindent					" Tab键的宽度
-"set expandtab				" 空格代替tab
+set expandtab				" 空格代替tab
 set tabstop=4				" 统一缩进为4
 set softtabstop=4
 set shiftwidth=4
@@ -76,6 +76,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-pandoc/vim-pandoc-syntax'		
 Plugin 'fugitive.vim'
 Plugin 'rizzatti/dash.vim'
+Plugin 'terryma/vim-multiple-cursors'
 
 " c
 Plugin 'c.vim'							    
