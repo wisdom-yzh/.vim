@@ -1,18 +1,18 @@
 {
-	"ecmaVersion": 6,
-	"libs": [
-		"browser",
-		"jquery"
-	],
-	"loadEagerly": [
-		"*.js"
-	],
-	"plugins": {
-		"node": {},
-		"node-express": {},
+    "ecmaVersion": 6,
+    "libs": [
+        "browser",
+        "jquery"
+    ],
+    "loadEagerly": [
+        "*.js"
+    ],
+    "plugins": {
+        "node": {},
+        "node-express": {},
         "requirejs": {
-          "baseURL": "./",
-          "paths": {}
+            "baseURL": "./",
+            "paths": {}
         }
-	}
+    }
 }
