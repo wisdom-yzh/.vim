@@ -21,6 +21,7 @@ set autoread
 set hlsearch				" 搜索逐字符高亮
 set incsearch
 set laststatus=2            " 显示状态栏
+set backupcopy=yes          " 为了开启webpack-dev
 
 " 设置字符编码
 set encoding=utf-8
@@ -77,6 +78,7 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'fugitive.vim'
 Plugin 'rizzatti/dash.vim'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'chazy/cscope_maps'                  
 
 " c
 Plugin 'c.vim'							    
@@ -95,7 +97,6 @@ Plugin 'tobyS/pdv'
 " frontend
 Plugin 'pangloss/vim-javascript'			
 Plugin 'ternjs/tern_for_vim'
-Plugin 'chazy/cscope_maps'                  
 Plugin 'posva/vim-vue'
 Plugin 'mattn/emmet-vim'					
 
@@ -113,7 +114,8 @@ let g:Tlist_Enable_Fold_Column = 0
 " 文件列表查看
 map <F3> <plug>NERDTreeTabsToggle<CR> 
 map <F2> :TlistToggle<CR>
-map <F1> :!dot -Tpng % > %.png<CR>
+map <F1> :ConqueTermVSplit zsh<CR>
+"map <F1> :!dot -Tpng % > %.png<CR>
 
 " You Complete Me configure
 " 自动补全设置
