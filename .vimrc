@@ -37,6 +37,7 @@ set tabstop=4				" 统一缩进为4
 set softtabstop=4
 set shiftwidth=4
 set t_ut=
+autocmd Filetype css setlocal ts=2 sts=2 sw=2
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype phtml setlocal ts=2 sts=2 sw=2
 autocmd Filetype python setlocal ts=2 sts=2 sw=2
@@ -96,9 +97,11 @@ Plugin 'tobyS/pdv'
 
 " frontend
 Plugin 'pangloss/vim-javascript'			
+Plugin 'mxw/vim-jsx'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'posva/vim-vue'
 Plugin 'mattn/emmet-vim'					
+Plugin 'cakebaker/scss-syntax.vim'
 
 " php
 Plugin 'php.vim-for-php5'					
@@ -133,6 +136,8 @@ let g:ycm_seed_identifiers_with_syntax = 1
 " 跳转
 nnoremap <C-F12> :YcmCompleter GoToDefinition<CR>
 nnoremap <F12> :YcmCompleter GoToDeclaration<CR>
+au FileType javascript nnoremap <C-F12> :YcmCompleter GotoReference<CR>
+au FileType javascript nnoremap <F12> :YcmCompleter GoTo<CR>
 
 " 报错信息
 nmap <F4> :YcmDiags<CR>
@@ -149,6 +154,7 @@ let g:pymode_warnings = 0
 let g:pymode_rope_completion = 0
 let g:pymode_lint_write = 0
 
+au BufRead,BufNewFile *.{css,scss,less} set ft=css
 au BufRead,BufNewFile *.{xml,ejs} set ft=html
 au BufRead,BufNewFile *.vue set ft=vue
 
@@ -159,7 +165,8 @@ nmap md :!pandoc -s -S --latexmathml --listings % -o %.html <CR><CR>
 " js配置
 let g:javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 'false'
-let g:JSLintHighlightErrorLine = 0
+let g:JSLintHighlightErrorLine = 1
+let g:jsx_ext_required = 0
 
 " 状态栏设置
 let g:Powerline_symbols = 'unicode'
