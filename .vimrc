@@ -38,6 +38,7 @@ set softtabstop=4
 set shiftwidth=4
 set t_ut=
 autocmd Filetype css setlocal ts=2 sts=2 sw=2
+autocmd Filetype scss setlocal ts=2 sts=2 sw=2
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype phtml setlocal ts=2 sts=2 sw=2
 autocmd Filetype python setlocal ts=2 sts=2 sw=2
@@ -154,7 +155,7 @@ let g:pymode_warnings = 0
 let g:pymode_rope_completion = 0
 let g:pymode_lint_write = 0
 
-au BufRead,BufNewFile *.{css,scss,less} set ft=css
+au BufRead,BufNewFile *.{css,less} set ft=css
 au BufRead,BufNewFile *.{xml,ejs} set ft=html
 au BufRead,BufNewFile *.vue set ft=vue
 
