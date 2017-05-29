@@ -167,7 +167,7 @@ nmap md :!pandoc -s -S --latexmathml --listings % -o %.html <CR><CR>
 let g:javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 'false'
 let g:JSLintHighlightErrorLine = 1
-let g:jsx_ext_required = 0
+let g:jsx_ext_required = 1
 
 " ◊¥Ã¨¿∏…Ë÷√
 let g:Powerline_symbols = 'unicode'
