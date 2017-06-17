@@ -9,9 +9,7 @@ set cul						" 高亮光标所在行
 set shortmess=atI   	 	" 启动的时候不显示那个援助乌干达儿童的提示
 set backspace=2
 set helplang=cn
-set encoding=utf-8
 set number		 	        " 显示行号
-set langmenu=zh_CN.UTF-8 	" 语言设置
 set helplang=cn
 set viminfo+=!		 	    " 保存全局变量
 set iskeyword+=_,$,@,%,#,- 	" 带有如下符号的单词不要被换行分割
@@ -26,7 +24,7 @@ set backupcopy=yes          " 为了开启webpack-dev
 " 设置字符编码
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
-set fileencoding=gb2312
+set fileencoding=utf-8
 set termencoding=utf-8
 
 " 设置缩进
@@ -65,7 +63,7 @@ call vundle#rc()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/vundle'						
-Plugin 'kien/ctrlp.vim'						
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'				
 Plugin 'jistr/vim-nerdtree-tabs'			
 Plugin 'Syntastic'							
@@ -76,11 +74,11 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'rosenfeld/conque-term'              
 Plugin 'delimitMate.vim'					
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-pandoc/vim-pandoc-syntax'		
 Plugin 'fugitive.vim'
 Plugin 'rizzatti/dash.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'chazy/cscope_maps'                  
+Plugin 'ryanoasis/vim-webdevicons'
 
 " c
 Plugin 'c.vim'							    
@@ -108,6 +106,9 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'php.vim-for-php5'					
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'joonty/vdebug'                      
+
+" document
+Plugin 'vim-pandoc/vim-pandoc-syntax'		
 
 " 函数列表查看
 let g:Tlist_Show_One_File = 1
@@ -161,7 +162,7 @@ au BufRead,BufNewFile *.vue set ft=vue
 
 " pandoc设置
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=pandoc
-nmap md :!pandoc -s -S --latexmathml --listings % -o %.html <CR><CR>
+autocmd Filetype pandoc nmap md :!pandoc -s -S --latexmathml --listings % -o %.html <CR><CR>
 
 " js配置
 let g:javascript_enable_domhtmlcss = 1
@@ -201,6 +202,7 @@ au FileType javascript :UltiSnipsAddFiletypes javascript-node
 au FileType php :UltiSnipsAddFiletypes php 
 au FileType python :UltiSnipsAddFiletypes python
 au FileType c :UltiSnipsAddFiletypes c
+au FileType tex :UltiSnipsAddFiletypes tex
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/bundle/vim-snippets/UltiSnips'
 let g:UltiSnipsExpandTrigger="<tab>"
