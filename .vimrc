@@ -194,6 +194,9 @@ nnoremap <C-l> :call pdv#DocumentWithSnip()<CR>
 " Trigger configuration. Do not use <tab> if you use
 au FileType javascript :UltiSnipsAddFiletypes javascript
 au FileType javascript :UltiSnipsAddFiletypes javascript-node
+au FileType css :UltiSnipsAddFiletypes css
+au FileType scss :UltiSnipsAddFiletypes css
+au FileType less :UltiSnipsAddFiletypes css
 au FileType php :UltiSnipsAddFiletypes php 
 au FileType python :UltiSnipsAddFiletypes python
 au FileType c :UltiSnipsAddFiletypes c
