@@ -70,7 +70,7 @@ Plugin 'Syntastic'
 Plugin 'Valloric/YouCompleteMe'		
 Plugin 'scrooloose/nerdcommenter'			
 Plugin 'taglist-plus'						
-Plugin 'Lokaltog/vim-powerline'             
+Plugin 'vim-airline/vim-airline'
 Plugin 'rosenfeld/conque-term'              
 Plugin 'delimitMate.vim'					
 Plugin 'altercation/vim-colors-solarized'
@@ -110,20 +110,16 @@ Plugin 'joonty/vdebug'
 " document
 Plugin 'vim-pandoc/vim-pandoc-syntax'		
 
-" 函数列表查看
+" FileList & TList
+map <F3> <plug>NERDTreeTabsToggle<CR> 
+map <F2> :TlistToggle<CR>
 let g:Tlist_Show_One_File = 1
 let g:Tlist_Use_Right_Window = 1
 let g:Tlist_Use_Horiz_Window = 0
 let g:Tlist_Enable_Fold_Column = 0
 
-" 文件列表查看
-map <F3> <plug>NERDTreeTabsToggle<CR> 
-map <F2> :TlistToggle<CR>
-map <F1> :ConqueTermVSplit zsh<CR>
-"map <F1> :!dot -Tpng % > %.png<CR>
-
 " You Complete Me configure
-" 自动补全设置
+" autocomplete
 let g:ycm_global_ycm_extra_conf =  '~/.ycm_extra_conf.py'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
@@ -134,21 +130,25 @@ let g:ycm_key_list_select_completion = []
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_seed_identifiers_with_syntax = 1
-
-" 跳转
+" jump
 nnoremap <C-F12> :YcmCompleter GoToDefinition<CR>
 nnoremap <F12> :YcmCompleter GoToDeclaration<CR>
 au FileType javascript nnoremap <C-F12> :YcmCompleter GotoReference<CR>
 au FileType javascript nnoremap <F12> :YcmCompleter GoTo<CR>
 
-" 报错信息
-nmap <F4> :YcmDiags<CR>
-let g:ycm_error_symbol = '>>'
-let g:ycm_warning_symbol = '>?'
-
 " syntastic checker
-let g:syntastic_python_checkers = ["pep8", "pyflakes"]
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
 let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
+let g:syntastic_javascript_checkers = ["eslint"]
+let g:syntastic_javascript_eslint_exe = "$(npm bin)/eslint"
+let g:syntastic_python_checkers = ["pep8", "pyflakes"]
 
 " pymode 设置
 let g:pymode_folding = 0
@@ -156,6 +156,7 @@ let g:pymode_warnings = 0
 let g:pymode_rope_completion = 0
 let g:pymode_lint_write = 0
 
+" 文件类型绑定
 au BufRead,BufNewFile *.{css,less} set ft=css
 au BufRead,BufNewFile *.{xml,ejs} set ft=html
 au BufRead,BufNewFile *.vue set ft=vue
@@ -167,13 +168,7 @@ autocmd Filetype pandoc nmap md :!pandoc -s -S --latexmathml --listings % -o %.h
 " js配置
 let g:javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 'false'
-let g:JSLintHighlightErrorLine = 1
 let g:jsx_ext_required = 1
-
-" 状态栏设置
-let g:Powerline_symbols = 'unicode'
-let g:Powerline_stl_path_style = 'short'
-let g:Powerline_theme = 'default'
 
 " xdebug调试配置
 let g:vdebug_keymap = {}
