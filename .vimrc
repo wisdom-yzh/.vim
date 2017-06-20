@@ -39,7 +39,6 @@ autocmd Filetype css setlocal ts=2 sts=2 sw=2
 autocmd Filetype scss setlocal ts=2 sts=2 sw=2
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype phtml setlocal ts=2 sts=2 sw=2
-autocmd Filetype python setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 " leaderº¸Œª…Ë÷√
@@ -71,7 +70,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'			
 Plugin 'taglist-plus'						
 Plugin 'vim-airline/vim-airline'
-Plugin 'rosenfeld/conque-term'              
 Plugin 'delimitMate.vim'					
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'fugitive.vim'
@@ -80,19 +78,14 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'chazy/cscope_maps'                  
 Plugin 'ryanoasis/vim-webdevicons'
 
-" c
-Plugin 'c.vim'							    
-Plugin 'c-standard-functions-highlight'		
-
-" python
-Plugin 'python.vim'							
-Plugin 'Python-mode-klen'					
-
 " snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'tobyS/vmustache'
 Plugin 'tobyS/pdv'
+
+" python
+Plugin 'Python-mode-klen'					
 
 " frontend
 Plugin 'pangloss/vim-javascript'			
@@ -146,8 +139,8 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
+let g:syntastic_php_phpcs_args = '--standard=PSR2'
 let g:syntastic_javascript_checkers = ["eslint"]
-let g:syntastic_javascript_eslint_exe = "$(npm bin)/eslint"
 let g:syntastic_python_checkers = ["pep8", "pyflakes"]
 
 " pymode …Ë÷√
