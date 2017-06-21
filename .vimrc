@@ -65,7 +65,7 @@ Plugin 'gmarik/vundle'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'				
 Plugin 'jistr/vim-nerdtree-tabs'			
-Plugin 'Syntastic'							
+Plugin 'vim-syntastic/syntastic'							
 Plugin 'Valloric/YouCompleteMe'		
 Plugin 'scrooloose/nerdcommenter'			
 Plugin 'taglist-plus'						
@@ -135,12 +135,12 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
 let g:syntastic_php_phpcs_args = '--standard=PSR2'
-let g:syntastic_javascript_checkers = ["eslint"]
+let g:syntastic_javascript_checkers = ["standard"]
 let g:syntastic_python_checkers = ["pep8", "pyflakes"]
 
 " pymode …Ë÷√
