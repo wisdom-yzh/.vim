@@ -5,33 +5,33 @@ filetype plugin indent on
 set foldenable
 set foldmethod=indent
 set foldlevelstart=99
-set cul						" ¸ßÁÁ¹â±êËùÔÚĞĞ
-set shortmess=atI   	 	" Æô¶¯µÄÊ±ºò²»ÏÔÊ¾ÄÇ¸öÔ®ÖúÎÚ¸É´ï¶ùÍ¯µÄÌáÊ¾
+set cul						" é«˜äº®å…‰æ ‡æ‰€åœ¨è¡Œ
+set shortmess=atI   	 	" å¯åŠ¨çš„æ—¶å€™ä¸æ˜¾ç¤ºé‚£ä¸ªæ´åŠ©ä¹Œå¹²è¾¾å„¿ç«¥çš„æç¤º
 set backspace=2
 set helplang=cn
-set number		 	        " ÏÔÊ¾ĞĞºÅ
+set number		 	        " æ˜¾ç¤ºè¡Œå·
 set helplang=cn
-set viminfo+=!		 	    " ±£´æÈ«¾Ö±äÁ¿
-set iskeyword+=_,$,@,%,#,- 	" ´øÓĞÈçÏÂ·ûºÅµÄµ¥´Ê²»Òª±»»»ĞĞ·Ö¸î
-set noeb					" È¥µôÊäÈë´íÎóµÄÌáÊ¾ÉùÒô
-set confirm					" ÔÚ´¦ÀíÎ´±£´æ»òÖ»¶ÁÎÄ¼şµÄÊ±ºò£¬µ¯³öÈ·ÈÏ
+set viminfo+=!		 	    " ä¿å­˜å…¨å±€å˜é‡
+set iskeyword+=_,$,@,%,#,- 	" å¸¦æœ‰å¦‚ä¸‹ç¬¦å·çš„å•è¯ä¸è¦è¢«æ¢è¡Œåˆ†å‰²
+set noeb					" å»æ‰è¾“å…¥é”™è¯¯çš„æç¤ºå£°éŸ³
+set confirm					" åœ¨å¤„ç†æœªä¿å­˜æˆ–åªè¯»æ–‡ä»¶çš„æ—¶å€™ï¼Œå¼¹å‡ºç¡®è®¤
 set autoread
-set hlsearch				" ËÑË÷Öğ×Ö·û¸ßÁÁ
+set hlsearch				" æœç´¢é€å­—ç¬¦é«˜äº®
 set incsearch
-set laststatus=2            " ÏÔÊ¾×´Ì¬À¸
-set backupcopy=yes          " ÎªÁË¿ªÆôwebpack-dev
+set laststatus=2            " æ˜¾ç¤ºçŠ¶æ€æ 
+set backupcopy=yes          " ä¸ºäº†å¼€å¯webpack-dev
 
-" ÉèÖÃ×Ö·û±àÂë
+" è®¾ç½®å­—ç¬¦ç¼–ç 
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
 set fileencoding=utf-8
 set termencoding=utf-8
 
-" ÉèÖÃËõ½ø
-set autoindent				" ×Ô¶¯Ëõ½ø
-set cindent					" Tab¼üµÄ¿í¶È
-set expandtab				" ¿Õ¸ñ´úÌætab
-set tabstop=4				" Í³Ò»Ëõ½øÎª4
+" è®¾ç½®ç¼©è¿›
+set autoindent				" è‡ªåŠ¨ç¼©è¿›
+set cindent					" Tabé”®çš„å®½åº¦
+set expandtab				" ç©ºæ ¼ä»£æ›¿tab
+set tabstop=4				" ç»Ÿä¸€ç¼©è¿›ä¸º4
 set softtabstop=4
 set shiftwidth=4
 set t_ut=
@@ -41,21 +41,21 @@ autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype phtml setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
-" leader¼üÎ»ÉèÖÃ
+" leaderé”®ä½è®¾ç½®
 let g:mapleader = ','
 
-" ÅäÉ«
+" é…è‰²
 "syntax enable
 "color darkblue
 set background=dark
 colorscheme solarized
 
-" tabÇĞ»»
+" tabåˆ‡æ¢
 map <C-j> :tabp<CR>
 map <C-k> :tabn<CR>
 
 
-" ²å¼ş¹ÜÀí
+" æ’ä»¶ç®¡ç†
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
@@ -65,7 +65,8 @@ Plugin 'gmarik/vundle'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'				
 Plugin 'jistr/vim-nerdtree-tabs'			
-Plugin 'vim-syntastic/syntastic'							
+Plugin 'w0rp/ale'
+" Plugin 'vim-syntastic/syntastic'							
 Plugin 'Valloric/YouCompleteMe'		
 Plugin 'scrooloose/nerdcommenter'			
 Plugin 'taglist-plus'						
@@ -103,6 +104,15 @@ Plugin 'joonty/vdebug'
 " document
 Plugin 'vim-pandoc/vim-pandoc-syntax'		
 
+" ctrlp ignore directory
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\v[\/]\.(git|hg|svn)|(node_modules|vendor)$',
+            \ 'file': '\v\.(exe|so|dll)$',
+            \ }
+        
+
+
 " FileList & TList
 map <F3> <plug>NERDTreeTabsToggle<CR> 
 map <F2> :TlistToggle<CR>
@@ -129,41 +139,62 @@ nnoremap <F12> :YcmCompleter GoToDeclaration<CR>
 au FileType javascript nnoremap <C-F12> :YcmCompleter GotoReference<CR>
 au FileType javascript nnoremap <F12> :YcmCompleter GoTo<CR>
 
-" syntastic checker
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
-let g:syntastic_php_phpcs_args = '--standard=PSR2'
-let g:syntastic_javascript_checkers = ["standard"]
-let g:syntastic_python_checkers = ["pep8", "pyflakes"]
+" ale config
+let g:ale_linters = {
+\ 'c': ['clang'],
+\ 'cpp': ['clang'],
+\'python': ['pyflakes'],
+\'php': ['phpcs', 'phpmd'],
+\'javascript': ['standard']
+\}
+let g:ale_php_phpcs_standard = 'PSR2'
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_error = '!>'
+let g:ale_sign_warning = '?>'
+let g:ale_echo_msg_error_str = 'Error'
+let g:ale_echo_msg_warning_str = 'Warning'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_open_list = 1
+let g:ale_keep_list_window_open = 0
+let g:ale_set_quickfix = 1
 
-" pymode ÉèÖÃ
+
+" syntastic checker
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_aggregate_errors = 1
+" let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
+" let g:syntastic_php_phpcs_args = '--standard=PSR2'
+" let g:syntastic_javascript_checkers = ["standard"]
+" let g:syntastic_python_checkers = ["pep8", "pyflakes"]
+
+" pymode è®¾ç½®
 let g:pymode_folding = 0
 let g:pymode_warnings = 0
 let g:pymode_rope_completion = 0
 let g:pymode_lint_write = 0
 
-" ÎÄ¼şÀàĞÍ°ó¶¨
+" æ–‡ä»¶ç±»å‹ç»‘å®š
 au BufRead,BufNewFile *.{css,less} set ft=css
 au BufRead,BufNewFile *.{xml,ejs} set ft=html
 au BufRead,BufNewFile *.vue set ft=vue
 
-" pandocÉèÖÃ
+" pandocè®¾ç½®
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=pandoc
 autocmd Filetype pandoc nmap md :!pandoc -s -S --latexmathml --listings % -o %.html <CR><CR>
 
-" jsÅäÖÃ
+" jsé…ç½®
 let g:javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 'false'
 let g:jsx_ext_required = 1
+"autocmd bufwritepost *.js silent !standard --fix
 
-" xdebugµ÷ÊÔÅäÖÃ
+" xdebugè°ƒè¯•é…ç½®
 let g:vdebug_keymap = {}
 let g:vdebug_keymap["run"] = '<F5>'
 let g:vdebug_keymap["run_to_cursor"] = "<F6>"
@@ -177,10 +208,10 @@ let g:vdebug_options["port"] = 8008
 let g:phpcomplete_cache_taglists = 1
 let g:phpcomplete_enhance_jump_to_definition = 1
 
-" dash ¿ì½İ¼ü
+" dash å¿«æ·é”®
 nmap <silent> <leader>d <Plug>DashSearch
 
-" Óï·¨²¹È«
+" è¯­æ³•è¡¥å…¨
 " pdv php-document config
 let g:pdv_template_dir = $HOME . "/.vim/bundle/pdv/templates_snip"
 nnoremap <C-l> :call pdv#DocumentWithSnip()<CR>
