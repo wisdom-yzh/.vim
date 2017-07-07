@@ -141,8 +141,9 @@ au FileType javascript nnoremap <F12> :YcmCompleter GoTo<CR>
 
 " ale config
 let g:ale_linters = {
-\ 'c': ['clang'],
-\ 'cpp': ['clang'],
+\'html': [],
+\'c': ['clang'],
+\'cpp': ['clang'],
 \'python': ['pyflakes'],
 \'php': ['phpcs', 'phpmd'],
 \'javascript': ['standard']
@@ -156,7 +157,9 @@ let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 0
-let g:ale_set_quickfix = 1
+let g:ale_set_quickfix = 0
+let g:ale_set_loclist = 1
+let g:ale_lint_on_text_changed = 'never'
 
 
 " syntastic checker
