@@ -121,6 +121,22 @@ let g:Tlist_Use_Right_Window = 1
 let g:Tlist_Use_Horiz_Window = 0
 let g:Tlist_Enable_Fold_Column = 0
 
+" toggle location list open
+function! ToggleQuickFix()
+  if exists("g:qwindow")
+    lclose
+    unlet g:qwindow
+  else
+    try
+      lopen 10
+      let g:qwindow = 1
+    catch 
+      echo "No Errors found!"
+    endtry
+  endif
+endfunction
+nmap <script> <silent> <F4> :call ToggleQuickFix()<CR>
+
 " You Complete Me configure
 " autocomplete
 let g:ycm_global_ycm_extra_conf =  '~/.ycm_extra_conf.py'
@@ -142,11 +158,11 @@ au FileType javascript nnoremap <F12> :YcmCompleter GoTo<CR>
 " ale config
 let g:ale_linters = {
 \'html': [],
+\'javascript': ['eslint'],
 \'c': ['clang'],
 \'cpp': ['clang'],
 \'python': ['pyflakes'],
-\'php': ['phpcs', 'phpmd'],
-\'javascript': ['standard']
+\'php': ['phpcs', 'phpmd']
 \}
 let g:ale_php_phpcs_standard = 'PSR2'
 let g:airline#extensions#ale#enabled = 1
@@ -155,7 +171,7 @@ let g:ale_sign_warning = '?>'
 let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_open_list = 1
+let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
 let g:ale_set_quickfix = 0
 let g:ale_set_loclist = 1
