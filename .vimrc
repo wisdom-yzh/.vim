@@ -49,6 +49,7 @@ let g:mapleader = ','
 "color darkblue
 set background=dark
 colorscheme solarized
+hi VertSplit ctermbg=0 
 
 " tab切换
 map <C-j> :tabp<CR>
@@ -66,10 +67,10 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'				
 Plugin 'jistr/vim-nerdtree-tabs'			
 Plugin 'w0rp/ale'
-" Plugin 'vim-syntastic/syntastic'							
 Plugin 'Valloric/YouCompleteMe'		
 Plugin 'scrooloose/nerdcommenter'			
-Plugin 'taglist-plus'						
+Plugin 'majutsushi/tagbar'
+" Plugin 'taglist-plus'						
 Plugin 'vim-airline/vim-airline'
 Plugin 'delimitMate.vim'					
 Plugin 'altercation/vim-colors-solarized'
@@ -113,13 +114,11 @@ let g:ctrlp_custom_ignore = {
         
 
 
-" FileList & TList
+" FileList
 map <F3> <plug>NERDTreeTabsToggle<CR> 
-map <F2> :TlistToggle<CR>
-let g:Tlist_Show_One_File = 1
-let g:Tlist_Use_Right_Window = 1
-let g:Tlist_Use_Horiz_Window = 0
-let g:Tlist_Enable_Fold_Column = 0
+
+" TagBar
+nmap <F2> :TagbarToggle<CR>
 
 " toggle location list open
 function! ToggleQuickFix()
@@ -156,14 +155,18 @@ au FileType javascript nnoremap <C-F12> :YcmCompleter GotoReference<CR>
 au FileType javascript nnoremap <F12> :YcmCompleter GoTo<CR>
 
 " ale config
+"\'javascript': ['eslint'],
 let g:ale_linters = {
 \'html': [],
-\'javascript': ['eslint'],
-\'c': ['clang'],
-\'cpp': ['clang'],
+\'javascript': ['standard'],
 \'python': ['pyflakes'],
-\'php': ['phpcs', 'phpmd']
+\'php': ['phpcs', 'phpmd'],
+\'c': [],
+\'cpp': []
 \}
+"\'c': ['clang'],
+"\'cpp': ['clang'],
+
 let g:ale_php_phpcs_standard = 'PSR2'
 let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_error = '!>'

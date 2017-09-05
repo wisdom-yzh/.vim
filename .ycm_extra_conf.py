@@ -52,15 +52,19 @@ flags = [
 # a "-std=<something>".
 # For a C project, you would set this to something like 'c99' instead of
 # 'c++11'.
-# '-std=c+11',
-'-std=c99',
+'-std=c++11',
+# '-std=c99',
 # ...and the same thing goes for the magic -x option which specifies the
 # language that the files to be compiled are written in. This is mostly
 # relevant for c++ headers.
 # For a C project, you would set this to 'c' instead of 'c++'.
 '-x',
-'c',
+'c++',
 # 'c++',
+'-isystem',
+'/usr/local/include/node',
+'-isystem',
+'/usr/local/lib/node_modules/nan',
 '-isystem',
 '../BoostParts',
 '-isystem',
@@ -82,7 +86,7 @@ flags = [
 '-isystem',
 './tests/gmock',
 '-isystem',
-'./tests/gmock/include',
+'./tests/gmock/include'
 ]
 
 
