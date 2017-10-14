@@ -45,11 +45,14 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 let g:mapleader = ','
 
 " 配色
-"syntax enable
-"color darkblue
-set background=dark
-colorscheme solarized
-hi VertSplit ctermbg=0 
+syntax enable
+color dracula
+" color darkblue
+" set background=dark
+" colorscheme solarized
+"hi VertSplit ctermbg=0 
+"hi Folded ctermbg=0
+"hi FoldedColumn ctermbg=0
 
 " tab切换
 map <C-j> :tabp<CR>
@@ -73,7 +76,8 @@ Plugin 'majutsushi/tagbar'
 " Plugin 'taglist-plus'						
 Plugin 'vim-airline/vim-airline'
 Plugin 'delimitMate.vim'					
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'dracula/vim'
+" Plugin 'altercation/vim-colors-solarized'
 Plugin 'fugitive.vim'
 Plugin 'rizzatti/dash.vim'
 Plugin 'terryma/vim-multiple-cursors'
@@ -148,6 +152,7 @@ let g:ycm_key_list_select_completion = []
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_goto_buffer_command = 'vertical-split'
 " jump
 nnoremap <C-F12> :YcmCompleter GoToDefinition<CR>
 nnoremap <F12> :YcmCompleter GoToDeclaration<CR>
