@@ -53,6 +53,7 @@ color dracula
 "hi VertSplit ctermbg=0 
 "hi Folded ctermbg=0
 "hi FoldedColumn ctermbg=0
+hi PmenuSel ctermfg=121
 
 " tab切换
 map <C-j> :tabp<CR>
@@ -73,11 +74,9 @@ Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'		
 Plugin 'scrooloose/nerdcommenter'			
 Plugin 'majutsushi/tagbar'
-" Plugin 'taglist-plus'						
 Plugin 'vim-airline/vim-airline'
 Plugin 'delimitMate.vim'					
 Plugin 'dracula/vim'
-" Plugin 'altercation/vim-colors-solarized'
 Plugin 'fugitive.vim'
 Plugin 'rizzatti/dash.vim'
 Plugin 'terryma/vim-multiple-cursors'
@@ -112,7 +111,7 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 " ctrlp ignore directory
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/]\.(git|hg|svn)|(node_modules|vendor)$',
+            \ 'dir':  '\v[\/]\.(git|hg|svn|idea)|(node_modules|vendor)$',
             \ 'file': '\v\.(exe|so|dll)$',
             \ }
         
@@ -163,7 +162,7 @@ au FileType javascript nnoremap <F12> :YcmCompleter GoTo<CR>
 "\'javascript': ['eslint'],
 let g:ale_linters = {
 \'html': [],
-\'javascript': ['standard'],
+\'javascript': ['eslint'],
 \'python': ['pyflakes'],
 \'php': ['phpcs', 'phpmd'],
 \'c': [],
