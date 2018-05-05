@@ -20,6 +20,7 @@ set hlsearch				" 搜索逐字符高亮
 set incsearch
 set laststatus=2            " 显示状态栏
 set backupcopy=yes          " 为了开启webpack-dev
+set tags=./tags;,tags
 
 " 设置字符编码
 set encoding=utf-8
@@ -50,63 +51,60 @@ color dracula
 " color darkblue
 " set background=dark
 " colorscheme solarized
-"hi VertSplit ctermbg=0 
-"hi Folded ctermbg=0
-"hi FoldedColumn ctermbg=0
+" hi VertSplit ctermbg=0 
+" hi Folded ctermbg=0
+" hi FoldedColumn ctermbg=0
 hi PmenuSel ctermfg=121
 
 " tab切换
 map <C-j> :tabp<CR>
 map <C-k> :tabn<CR>
 
-
 " 插件管理
+call plug#begin('~/.vim/plugged')
+
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+" set rtp+=~/.vim/bundle/vundle
+" call vundle#rc()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'						
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'				
-Plugin 'jistr/vim-nerdtree-tabs'			
-Plugin 'w0rp/ale'
-Plugin 'Valloric/YouCompleteMe'		
-Plugin 'scrooloose/nerdcommenter'			
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-airline/vim-airline'
-Plugin 'delimitMate.vim'					
-Plugin 'dracula/vim'
-Plugin 'fugitive.vim'
-Plugin 'rizzatti/dash.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'chazy/cscope_maps'                  
-Plugin 'ryanoasis/vim-webdevicons'
+" Plugin 'gmarik/vundle'						
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'				
+Plug 'jistr/vim-nerdtree-tabs'			
+Plug 'w0rp/ale'
+Plug 'Valloric/YouCompleteMe'		
+Plug 'scrooloose/nerdcommenter'			
+Plug 'majutsushi/tagbar'
+Plug 'vim-airline/vim-airline'
+Plug 'Raimondi/delimitMate'
+Plug 'dracula/vim'
+Plug 'tpope/vim-fugitive'
+Plug 'rizzatti/dash.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'chazy/cscope_maps'                  
+Plug 'ryanoasis/vim-webdevicons'
 
 " snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'tobyS/vmustache'
-Plugin 'tobyS/pdv'
-
-" python
-Plugin 'Python-mode-klen'					
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " frontend
-Plugin 'pangloss/vim-javascript'			
-Plugin 'mxw/vim-jsx'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'posva/vim-vue'
-Plugin 'mattn/emmet-vim'					
-Plugin 'cakebaker/scss-syntax.vim'
+Plug 'pangloss/vim-javascript'			
+Plug 'mxw/vim-jsx'
+Plug 'ternjs/tern_for_vim'
+Plug 'posva/vim-vue'
+Plug 'mattn/emmet-vim'					
+Plug 'cakebaker/scss-syntax.vim'
 
 " php
-Plugin 'php.vim-for-php5'					
-Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'joonty/vdebug'                      
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'joonty/vdebug'                      
 
 " document
-Plugin 'vim-pandoc/vim-pandoc-syntax'		
+Plug 'vim-pandoc/vim-pandoc-syntax'		
+call plug#end()
 
 " ctrlp ignore directory
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
@@ -115,11 +113,8 @@ let g:ctrlp_custom_ignore = {
             \ 'file': '\v\.(exe|so|dll)$',
             \ }
         
-
-
 " FileList
 map <F3> <plug>NERDTreeTabsToggle<CR> 
-
 " TagBar
 nmap <F2> :TagbarToggle<CR>
 
@@ -139,6 +134,22 @@ function! ToggleQuickFix()
 endfunction
 nmap <script> <silent> <F4> :call ToggleQuickFix()<CR>
 
+" ctags
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+let g:gutentags_file_list_command = {
+    \ 'markers': {
+        \ '.git': 'git ls-files',
+        \ },
+    \ }
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+let s:vim_tags = expand('~/.cache/tags')
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+let g:gutentags_cache_dir = s:vim_tags
+let g:gutentags_ctags_executable_php = 'phpctags'
+
 " You Complete Me configure
 " autocomplete
 let g:ycm_global_ycm_extra_conf =  '~/.ycm_extra_conf.py'
@@ -152,6 +163,10 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_goto_buffer_command = 'vertical-split'
+let g:ycm_semantic_triggers =  {
+            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+            \ 'cs,lua,javascript,php': ['re!\w{2}'],
+            \ }
 " jump
 nnoremap <C-F12> :YcmCompleter GoToDefinition<CR>
 nnoremap <F12> :YcmCompleter GoToDeclaration<CR>
@@ -159,7 +174,6 @@ au FileType javascript nnoremap <C-F12> :YcmCompleter GotoReference<CR>
 au FileType javascript nnoremap <F12> :YcmCompleter GoTo<CR>
 
 " ale config
-"\'javascript': ['eslint'],
 let g:ale_linters = {
 \'html': [],
 \'javascript': ['eslint'],
@@ -184,27 +198,6 @@ let g:ale_set_quickfix = 0
 let g:ale_set_loclist = 1
 let g:ale_lint_on_text_changed = 'never'
 
-
-" syntastic checker
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_aggregate_errors = 1
-" let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
-" let g:syntastic_php_phpcs_args = '--standard=PSR2'
-" let g:syntastic_javascript_checkers = ["standard"]
-" let g:syntastic_python_checkers = ["pep8", "pyflakes"]
-
-" pymode 设置
-let g:pymode_folding = 0
-let g:pymode_warnings = 0
-let g:pymode_rope_completion = 0
-let g:pymode_lint_write = 0
-
 " 文件类型绑定
 au BufRead,BufNewFile *.{css,less} set ft=css
 au BufRead,BufNewFile *.{xml,ejs} set ft=html
@@ -218,7 +211,6 @@ autocmd Filetype pandoc nmap md :!pandoc -s -S --latexmathml --listings % -o %.h
 let g:javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 'false'
 let g:jsx_ext_required = 1
-"autocmd bufwritepost *.js silent !standard --fix
 
 " xdebug调试配置
 let g:vdebug_keymap = {}
@@ -238,9 +230,6 @@ let g:phpcomplete_enhance_jump_to_definition = 1
 nmap <silent> <leader>d <Plug>DashSearch
 
 " 语法补全
-" pdv php-document config
-let g:pdv_template_dir = $HOME . "/.vim/bundle/pdv/templates_snip"
-nnoremap <C-l> :call pdv#DocumentWithSnip()<CR>
 " Trigger configuration. Do not use <tab> if you use
 au FileType javascript :UltiSnipsAddFiletypes javascript
 au FileType javascript :UltiSnipsAddFiletypes javascript-node
