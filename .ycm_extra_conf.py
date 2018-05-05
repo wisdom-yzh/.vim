@@ -62,7 +62,7 @@ flags = [
 'c++',
 # 'c++',
 '-isystem',
-'/usr/local/include/node',
+'/usr/local/include',
 '-isystem',
 '/usr/local/lib/node_modules/nan',
 '-isystem',
