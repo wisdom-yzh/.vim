@@ -2,6 +2,7 @@ set nocompatible         	" be iMproved, required
 syntax on
 filetype on
 filetype plugin indent on
+set mouse=a
 set foldenable
 set foldmethod=indent
 set foldlevelstart=99
@@ -149,6 +150,20 @@ if !isdirectory(s:vim_tags)
 endif
 let g:gutentags_cache_dir = s:vim_tags
 let g:gutentags_ctags_executable_php = 'phpctags'
+" 显示状态
+function! s:get_gutentags_status(mods) abort
+    let l:msg = ''
+    if index(a:mods, 'ctags') > 0
+        let l:msg .= '♨'
+    endif
+    if index(a:mods, 'cscope') > 0
+        let l:msg .= '♺'
+    endif
+    return l:msg
+endfunction
+
+set statusline+=%{gutentags#statusline_cb(
+    \function('<SID>get_gutentags_status'))}
 
 " You Complete Me configure
 " autocomplete
