@@ -49,12 +49,6 @@ let g:mapleader = ','
 " 配色
 syntax enable
 color dracula
-" color darkblue
-" set background=dark
-" colorscheme solarized
-" hi VertSplit ctermbg=0 
-" hi Folded ctermbg=0
-" hi FoldedColumn ctermbg=0
 hi PmenuSel ctermfg=121
 
 " tab切换
@@ -63,13 +57,6 @@ map <C-k> :tabn<CR>
 
 " 插件管理
 call plug#begin('~/.vim/plugged')
-
-" set the runtime path to include Vundle and initialize
-" set rtp+=~/.vim/bundle/vundle
-" call vundle#rc()
-
-" let Vundle manage Vundle, required
-" Plugin 'gmarik/vundle'						
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'				
 Plug 'jistr/vim-nerdtree-tabs'			
@@ -86,13 +73,15 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'chazy/cscope_maps'                  
 Plug 'ryanoasis/vim-webdevicons'
+Plug 'editorconfig/editorconfig-vim'
 
 " snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " frontend
-Plug 'pangloss/vim-javascript'			
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'ternjs/tern_for_vim'
 Plug 'posva/vim-vue'
@@ -192,6 +181,7 @@ au FileType javascript nnoremap <F12> :YcmCompleter GoTo<CR>
 let g:ale_linters = {
 \'html': [],
 \'javascript': ['eslint'],
+\'typescript': ['tslint'],
 \'python': ['pyflakes'],
 \'php': ['phpcs', 'phpmd'],
 \'c': [],
