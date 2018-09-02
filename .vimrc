@@ -172,10 +172,7 @@ let g:ycm_semantic_triggers =  {
             \ 'cs,lua,javascript,php': ['re!\w{2}'],
             \ }
 " jump
-nnoremap <C-F12> :YcmCompleter GoToDefinition<CR>
-nnoremap <F12> :YcmCompleter GoToDeclaration<CR>
-au FileType javascript nnoremap <C-F12> :YcmCompleter GotoReference<CR>
-au FileType javascript nnoremap <F12> :YcmCompleter GoTo<CR>
+nnoremap <F12> :YcmCompleter GoTo<CR>
 
 " ale config
 let g:ale_linters = {
