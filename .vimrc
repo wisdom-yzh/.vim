@@ -50,6 +50,8 @@ let g:mapleader = ','
 syntax enable
 color dracula
 hi PmenuSel ctermfg=121
+hi CursorLine cterm=underline ctermbg=none
+hi Folded ctermbg=none
 
 " tab切换
 map <C-j> :tabp<CR>
@@ -83,7 +85,6 @@ Plug 'honza/vim-snippets'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
-Plug 'ternjs/tern_for_vim'
 Plug 'posva/vim-vue'
 Plug 'mattn/emmet-vim'					
 Plug 'cakebaker/scss-syntax.vim'
