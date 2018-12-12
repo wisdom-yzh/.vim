@@ -59,7 +59,9 @@ map <C-k> :tabn<CR>
 
 " 插件管理
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'				
 Plug 'jistr/vim-nerdtree-tabs'			
 Plug 'w0rp/ale'
@@ -91,18 +93,33 @@ Plug 'cakebaker/scss-syntax.vim'
 
 " php
 Plug 'shawncplus/phpcomplete.vim'
-Plug 'joonty/vdebug'                      
+Plug 'vim-vdebug/vdebug'                      
 
 " document
 Plug 'vim-pandoc/vim-pandoc-syntax'		
 call plug#end()
 
+" fzf
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <S-p> :Ag<CR>
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
 " ctrlp ignore directory
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/]\.(git|hg|svn|idea)|(node_modules|vendor)$',
-            \ 'file': '\v\.(exe|so|dll)$',
-            \ }
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+" let g:ctrlp_custom_ignore = {
+"             \ 'dir':  '\v[\/]\.(git|hg|svn|idea)|(node_modules|vendor)$',
+"             \ 'file': '\v\.(exe|so|dll)$',
+"             \ }
         
 " FileList
 map <F3> <plug>NERDTreeTabsToggle<CR> 
