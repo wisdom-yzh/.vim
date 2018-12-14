@@ -46,13 +46,6 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 " leader键位设置
 let g:mapleader = ','
 
-" 配色
-syntax enable
-color dracula
-hi PmenuSel ctermfg=121
-hi CursorLine cterm=underline ctermbg=none
-hi Folded ctermbg=none
-
 " tab切换
 map <C-j> :tabp<CR>
 map <C-k> :tabn<CR>
@@ -70,7 +63,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'Raimondi/delimitMate'
-Plug 'dracula/vim'
+Plug 'altercation/vim-colors-solarized', { 'as': 'solarized' }
 Plug 'tpope/vim-fugitive'
 Plug 'rizzatti/dash.vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -98,6 +91,19 @@ Plug 'vim-vdebug/vdebug'
 " document
 Plug 'vim-pandoc/vim-pandoc-syntax'		
 call plug#end()
+
+" 配色
+syntax enable
+set t_Co=256
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+set background=dark
+colorscheme solarized
+hi CursorLine cterm=underline ctermbg=none
+hi Folded ctermbg=none
+hi LineNr ctermbg=none
+hi VertSplit ctermbg=none
+hi StatusLineNC ctermbg=none
 
 " fzf
 nnoremap <silent> <C-p> :Files<CR>
@@ -230,7 +236,7 @@ autocmd Filetype pandoc nmap md :!pandoc -s -S --latexmathml --listings % -o %.h
 " js配置
 let g:javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 'false'
-let g:jsx_ext_required = 1
+let g:jsx_ext_required = 0
 
 " xdebug调试配置
 let g:vdebug_keymap = {}
@@ -261,7 +267,7 @@ au FileType python :UltiSnipsAddFiletypes python
 au FileType c :UltiSnipsAddFiletypes c
 au FileType tex :UltiSnipsAddFiletypes tex
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
-let g:UltiSnipsSnippetsDir = '~/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsSnippetsDir = '~/.vim/plugged/vim-snippets/UltiSnips'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
