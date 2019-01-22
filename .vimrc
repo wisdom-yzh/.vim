@@ -193,7 +193,8 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_goto_buffer_command = 'vertical-split'
 let g:ycm_semantic_triggers =  {
             \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-            \ 'cs,lua,javascript,php': ['re!\w{2}'],
+            \ 'javascript,typescript': ['.'],
+            \ 'php': ['->', '::'],
             \ }
 " jump
 nnoremap <F12> :YcmCompleter GoTo<CR>
