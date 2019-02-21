@@ -55,11 +55,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree'				
-Plug 'jistr/vim-nerdtree-tabs'			
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'w0rp/ale'
-Plug 'Valloric/YouCompleteMe'		
-Plug 'scrooloose/nerdcommenter'			
+Plug 'Valloric/YouCompleteMe'
+Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'Raimondi/delimitMate'
@@ -68,7 +68,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'rizzatti/dash.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'chazy/cscope_maps'                  
+Plug 'chazy/cscope_maps'
 Plug 'ryanoasis/vim-webdevicons'
 Plug 'editorconfig/editorconfig-vim'
 
@@ -81,15 +81,15 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
-Plug 'mattn/emmet-vim'					
+Plug 'mattn/emmet-vim'
 Plug 'cakebaker/scss-syntax.vim'
 
 " php
 Plug 'shawncplus/phpcomplete.vim'
-Plug 'vim-vdebug/vdebug'                      
+Plug 'vim-vdebug/vdebug'
 
 " document
-Plug 'vim-pandoc/vim-pandoc-syntax'		
+Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
 
 " 配色
@@ -104,6 +104,14 @@ hi Folded ctermbg=none
 hi LineNr ctermbg=none
 hi VertSplit ctermbg=none
 hi StatusLineNC ctermbg=none
+
+" emmet
+let g:user_emmet_settings = {
+\    'html' : {
+\        'quote_char': "'",
+\    },
+\}
+
 
 " fzf
 nnoremap <silent> <C-p> :Files<CR>
@@ -126,9 +134,9 @@ let g:fzf_action = {
 "             \ 'dir':  '\v[\/]\.(git|hg|svn|idea)|(node_modules|vendor)$',
 "             \ 'file': '\v\.(exe|so|dll)$',
 "             \ }
-        
+
 " FileList
-map <F3> <plug>NERDTreeTabsToggle<CR> 
+map <F3> <plug>NERDTreeTabsToggle<CR>
 " TagBar
 nmap <F2> :TagbarToggle<CR>
 
@@ -141,7 +149,7 @@ function! ToggleQuickFix()
     try
       lopen 10
       let g:qwindow = 1
-    catch 
+    catch
       echo "No Errors found!"
     endtry
   endif
@@ -181,8 +189,10 @@ set statusline+=%{gutentags#statusline_cb(
 " You Complete Me configure
 " autocomplete
 let g:ycm_global_ycm_extra_conf =  '~/.ycm_extra_conf.py'
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_filepath_completion_use_working_dir = 1
 let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
@@ -194,7 +204,7 @@ let g:ycm_goto_buffer_command = 'vertical-split'
 let g:ycm_semantic_triggers =  {
             \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
             \ 'javascript,typescript': ['.'],
-            \ 'php': ['->', '::'],
+            \ 'php': ['::', '->'],
             \ }
 " jump
 nnoremap <F12> :YcmCompleter GoTo<CR>
@@ -209,8 +219,13 @@ let g:ale_linters = {
 \'c': [],
 \'cpp': []
 \}
-"\'c': ['clang'],
-"\'cpp': ['clang'],
+
+let g:ale_fixers = {
+\'javascript': ['eslint'],
+\'*': ['remove_trailing_lines', 'trim_whitespace']
+\}
+" \'c': ['clang'],
+" \'cpp': ['clang']
 
 let g:ale_php_phpcs_standard = 'PSR2'
 let g:airline#extensions#ale#enabled = 1
@@ -224,6 +239,7 @@ let g:ale_keep_list_window_open = 0
 let g:ale_set_quickfix = 0
 let g:ale_set_loclist = 1
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_fix_on_save = 1
 
 " 文件类型绑定
 au BufRead,BufNewFile *.{css,less} set ft=css
@@ -263,7 +279,7 @@ au FileType javascript :UltiSnipsAddFiletypes javascript-node
 au FileType css :UltiSnipsAddFiletypes css
 au FileType scss :UltiSnipsAddFiletypes css
 au FileType less :UltiSnipsAddFiletypes css
-au FileType php :UltiSnipsAddFiletypes php 
+au FileType php :UltiSnipsAddFiletypes php
 au FileType python :UltiSnipsAddFiletypes python
 au FileType c :UltiSnipsAddFiletypes c
 au FileType tex :UltiSnipsAddFiletypes tex
