@@ -85,8 +85,8 @@ Plug 'mattn/emmet-vim'
 Plug 'cakebaker/scss-syntax.vim'
 
 " php
-Plug 'shawncplus/phpcomplete.vim'
-Plug 'vim-vdebug/vdebug'
+Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
+Plug 'vim-vdebug/vdebug', { 'for': 'php' }
 
 " document
 Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -159,10 +159,10 @@ nmap <script> <silent> <F4> :call ToggleQuickFix()<CR>
 " ctags
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 let g:gutentags_file_list_command = {
-    \ 'markers': {
-        \ '.git': 'git ls-files',
-        \ },
-    \ }
+\   'markers': {
+\     '.git': 'git ls-files',
+\   },
+\ }
 " 所生成的数据文件的名称
 let g:gutentags_ctags_tagfile = '.tags'
 let s:vim_tags = expand('~/.cache/tags')
