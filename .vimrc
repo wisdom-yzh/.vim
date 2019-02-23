@@ -122,6 +122,7 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_action = {
   \ 'ctrl-q': function('s:build_quickfix_list'),
   \ 'ctrl-t': 'tab split',
@@ -288,3 +289,8 @@ let g:UltiSnipsSnippetsDir = '~/.vim/plugged/vim-snippets/UltiSnips'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" c/c++ 开启gdb调试
+let g:termdebug_wide = 2
+autocmd Filetype cpp packadd termdebug
+autocmd Filetype cpp map <C-F5> :Termdebug<CR>
