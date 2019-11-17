@@ -42,6 +42,7 @@ autocmd Filetype scss setlocal ts=2 sts=2 sw=2
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype phtml setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
 
 " leader键位设置
 let g:mapleader = ','
@@ -54,11 +55,11 @@ map <C-k> :tabn<CR>
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'w0rp/ale'
 Plug 'Valloric/YouCompleteMe'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
@@ -214,7 +215,7 @@ nnoremap <F12> :YcmCompleter GoTo<CR>
 let g:ale_linters = {
 \'html': [],
 \'javascript': ['eslint'],
-\'typescript': ['tslint'],
+\'typescript': ['eslint'],
 \'python': ['pyflakes'],
 \'php': ['phpcs', 'phpmd'],
 \'c': [],
@@ -225,8 +226,6 @@ let g:ale_fixers = {
 \'javascript': ['eslint'],
 \'*': ['remove_trailing_lines', 'trim_whitespace']
 \}
-" \'c': ['clang'],
-" \'cpp': ['clang']
 
 let g:ale_php_phpcs_standard = 'PSR2'
 let g:airline#extensions#ale#enabled = 1
