@@ -139,8 +139,25 @@ let g:fzf_action = {
 
 " FileList
 map <F3> <plug>NERDTreeTabsToggle<CR>
+
 " TagBar
 nmap <F2> :TagbarToggle<CR>
+let g:tagbar_type_javascript = {
+            \ 'ctagsbin' : 'jsctags'
+            \ }
+let g:tagbar_type_typescript = {
+            \ 'ctagstype': 'typescript',
+            \ 'kinds': [
+            \ 'c:classes',
+            \ 'n:modules',
+            \ 'f:functions',
+            \ 'v:variables',
+            \ 'v:varlambdas',
+            \ 'm:members',
+            \ 'i:interfaces',
+            \ 'e:enums',
+            \ ]
+            \ }
 
 " toggle location list open
 function! ToggleQuickFix()
@@ -204,8 +221,8 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_goto_buffer_command = 'vertical-split'
 let g:ycm_semantic_triggers =  {
-            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-            \ 'javascript,typescript': ['.'],
+            \ 'c,cpp,python,java,go,erlang,perl,typescript': ['re!\w{2}'],
+            \ 'javascript': ['.'],
             \ 'php': ['::', '->'],
             \ }
 " jump
@@ -215,7 +232,7 @@ nnoremap <F12> :YcmCompleter GoTo<CR>
 let g:ale_linters = {
 \'html': [],
 \'javascript': ['eslint'],
-\'typescript': ['eslint'],
+\'typescript': ['eslint', 'tsserver', 'tslint'],
 \'python': ['pyflakes'],
 \'php': ['phpcs', 'phpmd'],
 \'c': [],
@@ -224,6 +241,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \'javascript': ['eslint'],
+\'typescript': ['eslint', 'tsserver'],
 \'*': ['remove_trailing_lines', 'trim_whitespace']
 \}
 
