@@ -21,6 +21,7 @@ set hlsearch				" 搜索逐字符高亮
 set incsearch
 set laststatus=2            " 显示状态栏
 set backupcopy=yes          " 为了开启webpack-dev
+set lazyredraw
 set tags=./tags;,tags
 
 " 设置字符编码
@@ -60,6 +61,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'w0rp/ale'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
@@ -72,6 +74,8 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'chazy/cscope_maps'
 Plug 'ryanoasis/vim-webdevicons'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'ervandew/supertab'
+Plug 'MattesGroeger/vim-bookmarks'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -89,9 +93,10 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
 Plug 'vim-vdebug/vdebug', { 'for': 'php' }
 
-" document
-Plug 'vim-pandoc/vim-pandoc-syntax'
+" markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 call plug#end()
+
 
 " 配色
 syntax enable
@@ -114,28 +119,19 @@ let g:user_emmet_settings = {
 \}
 
 
-" fzf
+" search
+nnoremap <silent> <C-c> :vimgrep <cword> %<CR> :cw <CR>
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <S-p> :Ag<CR>
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-
+nnoremap <silent> <S-p> :Ag <C-R><C-W><CR>
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-" ctrlp ignore directory
-" set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-" let g:ctrlp_custom_ignore = {
-"             \ 'dir':  '\v[\/]\.(git|hg|svn|idea)|(node_modules|vendor)$',
-"             \ 'file': '\v\.(exe|so|dll)$',
-"             \ }
+" bookmarks
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_auto_save = 1
 
 " FileList
 map <F3> <plug>NERDTreeTabsToggle<CR>
@@ -159,21 +155,26 @@ let g:tagbar_type_typescript = {
             \ ]
             \ }
 
-" toggle location list open
-function! ToggleQuickFix()
-  if exists("g:qwindow")
-    lclose
-    unlet g:qwindow
-  else
-    try
-      lopen 10
-      let g:qwindow = 1
-    catch
-      echo "No Errors found!"
-    endtry
-  endif
+" Git
+nmap <F6> :13Gstatus<CR>
+nmap <C-F6> :Gclog %<CR>
+nmap <S-F6> :Gblame<CR>
+
+" toggle location list and quick fix
+function! ToggleLocation()
+    if exists("g:lwindow")
+        lclose
+        unlet g:lwindow
+    else
+        try
+            lopen 10
+            let g:lwindow = 1
+        catch
+            echo "No Errors found!"
+        endtry
+    endif
 endfunction
-nmap <script> <silent> <F4> :call ToggleQuickFix()<CR>
+nnoremap <script> <silent> <F4> :call ToggleLocation()<CR>
 
 " ctags
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
@@ -215,24 +216,33 @@ let g:ycm_filepath_completion_use_working_dir = 1
 let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_key_list_select_completion = []
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_goto_buffer_command = 'vertical-split'
 let g:ycm_semantic_triggers =  {
-            \ 'c,cpp,python,java,go,erlang,perl,typescript': ['re!\w{2}'],
-            \ 'javascript': ['.'],
-            \ 'php': ['::', '->'],
+            \ 'typescript,javascript': ['re!\w{5}', '.'],
+            \ 'c,cpp,php': ['.', '::', '->'],
             \ }
 " jump
 nnoremap <F12> :YcmCompleter GoTo<CR>
+
+" supertab
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" snippets
+let g:UltiSnipsSnippetDirectories=['~/.vim/plugged/vim-snippets/UltiSnips']
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " ale config
 let g:ale_linters = {
 \'html': [],
 \'javascript': ['eslint'],
-\'typescript': ['eslint', 'tsserver', 'tslint'],
+\'typescript': ['eslint', 'tsserver'],
 \'python': ['pyflakes'],
 \'php': ['phpcs', 'phpmd'],
 \'c': [],
@@ -241,7 +251,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \'javascript': ['eslint'],
-\'typescript': ['eslint', 'tsserver'],
+\'typescript': ['eslint'],
 \'*': ['remove_trailing_lines', 'trim_whitespace']
 \}
 
@@ -259,21 +269,17 @@ let g:ale_set_loclist = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
 
-" 文件类型绑定
+" filetype aliasz
 au BufRead,BufNewFile *.{css,less} set ft=css
 au BufRead,BufNewFile *.{xml,ejs} set ft=html
 au BufRead,BufNewFile *.vue set ft=vue
 
-" pandoc设置
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=pandoc
-autocmd Filetype pandoc nmap md :!pandoc -s -S --latexmathml --listings % -o %.html <CR><CR>
-
-" js配置
+" js
 let g:javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 'false'
 let g:jsx_ext_required = 0
 
-" xdebug调试配置
+" xdebug
 let g:vdebug_keymap = {}
 let g:vdebug_keymap["run"] = '<F5>'
 let g:vdebug_keymap["run_to_cursor"] = "<F6>"
@@ -290,24 +296,14 @@ let g:phpcomplete_enhance_jump_to_definition = 1
 " dash 快捷键
 nmap <silent> <leader>d <Plug>DashSearch
 
-" 语法补全
-" Trigger configuration. Do not use <tab> if you use
-au FileType javascript :UltiSnipsAddFiletypes javascript
-au FileType javascript :UltiSnipsAddFiletypes javascript-node
-au FileType css :UltiSnipsAddFiletypes css
-au FileType scss :UltiSnipsAddFiletypes css
-au FileType less :UltiSnipsAddFiletypes css
-au FileType php :UltiSnipsAddFiletypes php
-au FileType python :UltiSnipsAddFiletypes python
-au FileType c :UltiSnipsAddFiletypes c
-au FileType tex :UltiSnipsAddFiletypes tex
-let g:UltiSnipsSnippetDirectories=['UltiSnips']
-let g:UltiSnipsSnippetsDir = '~/.vim/plugged/vim-snippets/UltiSnips'
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" markdown
+autocmd Filetype markdown nmap md <Plug>MarkdownPreview
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
 
-" c/c++ 开启gdb调试
+" c/c++ with gdb
 let g:termdebug_wide = 2
 autocmd Filetype cpp packadd termdebug
 autocmd Filetype cpp map <C-F5> :Termdebug<CR>
+autocmd Filetype cpp map <F9> :Break<CR>
+autocmd Filetype cpp map <S-F9> :Clear<CR>
