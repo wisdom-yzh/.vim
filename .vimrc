@@ -11,6 +11,7 @@ set shortmess=atI   	 	" 启动的时候不显示那个援助乌干达儿童的�
 set backspace=2
 set helplang=cn
 set number		 	        " 显示行号
+set rnu
 set helplang=cn
 set viminfo+=!		 	    " 保存全局变量
 set iskeyword+=_,$,@,%,#,- 	" 带有如下符号的单词不要被换行分割
@@ -59,7 +60,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'w0rp/ale'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --ts-completer' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'scrooloose/nerdcommenter'
@@ -102,14 +103,14 @@ call plug#end()
 syntax enable
 set t_Co=256
 let g:solarized_termcolors=256
-let g:solarized_termtrans=1
 set background=dark
 colorscheme solarized
-hi CursorLine cterm=underline ctermbg=none
-hi Folded ctermbg=none
-hi LineNr ctermbg=none
-hi VertSplit ctermbg=none
-hi StatusLineNC ctermbg=none
+" let g:solarized_termtrans=1
+" hi CursorLine cterm=underline ctermbg=none
+" hi Folded ctermbg=none
+" hi LineNr ctermbg=none
+" hi VertSplit ctermbg=none
+" hi StatusLineNC ctermbg=none
 
 " emmet
 let g:user_emmet_settings = {
@@ -242,7 +243,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:ale_linters = {
 \'html': [],
 \'javascript': ['eslint'],
-\'typescript': ['eslint', 'tsserver'],
+\'typescript': ['eslint', 'prettier', 'tsserver'],
 \'python': ['pyflakes'],
 \'php': ['phpcs', 'phpmd'],
 \'c': [],
@@ -251,7 +252,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \'javascript': ['eslint'],
-\'typescript': ['eslint'],
+\'typescript': ['eslint', 'prettier'],
 \'*': ['remove_trailing_lines', 'trim_whitespace']
 \}
 
