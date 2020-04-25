@@ -1,0 +1,45 @@
+{
+    "configurations": {
+        "launch": {
+            "adapter": "vscode-cpptools",
+            "configuration": {
+                "type": "cppdbg",
+                "request": "launch",
+                "program": "${workspaceRoot}/test",
+                "args": [],
+                "cwd": "${workspaceRoot}",
+                "environment": [],
+                "externalConsole": false,
+                "stopAtEntry": true,
+                "stopOnEntry": true,
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    }
+                ]
+            },
+            "breakpoints": {
+                "exception": {
+                    "cpp_catch": "",
+                    "cpp_throw": "",
+                    "objc_catch": "",
+                    "objc_throw": "",
+                    "swift_catch": "",
+                    "swift_throw": ""
+                }
+            }
+        },
+        "attach": {
+            "adapter": "vscode-cpptools",
+            "configuration": {
+                "type": "cppdbg",
+                "request": "attach",
+                "program": "${workspaceRoot}/test",
+                "MIMode": "gdb"
+            }
+        }
+    }
+}
