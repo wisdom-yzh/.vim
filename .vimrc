@@ -77,6 +77,7 @@ Plug 'ryanoasis/vim-webdevicons'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
 Plug 'MattesGroeger/vim-bookmarks'
+Plug 'Yggdroot/indentLine'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -89,10 +90,6 @@ Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
 Plug 'mattn/emmet-vim'
 Plug 'cakebaker/scss-syntax.vim'
-
-" php
-Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
-Plug 'vim-vdebug/vdebug', { 'for': 'php' }
 
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
@@ -280,20 +277,6 @@ let g:javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 'false'
 let g:jsx_ext_required = 0
 
-" xdebug
-let g:vdebug_keymap = {}
-let g:vdebug_keymap["run"] = '<F5>'
-let g:vdebug_keymap["run_to_cursor"] = "<F6>"
-let g:vdebug_keymap["step_over"] = "<F7>"
-let g:vdebug_keymap["step_into"] = "<F8>"
-let g:vdebug_keymap["step_out"] = "<F9>"
-let g:vdebug_options = {}
-let g:vdebug_options["port"] = 8008
-
-" phpcomplete enhanced
-let g:phpcomplete_cache_taglists = 1
-let g:phpcomplete_enhance_jump_to_definition = 1
-
 " dash 快捷键
 nmap <silent> <leader>d <Plug>DashSearch
 
@@ -302,9 +285,11 @@ autocmd Filetype markdown nmap md <Plug>MarkdownPreview
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 
-" c/c++ with gdb
-let g:termdebug_wide = 2
-autocmd Filetype cpp packadd termdebug
-autocmd Filetype cpp map <C-F5> :Termdebug<CR>
-autocmd Filetype cpp map <F9> :Break<CR>
-autocmd Filetype cpp map <S-F9> :Clear<CR>
+" vimspector
+packadd! vimspector
+nmap <F5> <Plug>VimspectorContinue
+nmap <S-F5> <Plug>VimspectorStop
+nmap <F9> <Plug>VimspectorToggleBreakpoint
+nmap <F10> <Plug>VimspectorStepOver
+nmap <F11> <Plug>VimspectorStepInto
+nmap <S-F11> <Plug>VimspectorStepOut
