@@ -28,6 +28,7 @@
         {
             "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
             "hidden": false,
+            "colorscheme": "Cambell",
             "name": "Ubuntu-18.04",
             "source": "Windows.Terminal.Wsl",
             "fontFace": "MesloLGS NF",
@@ -51,14 +52,84 @@
     ],
 
     // Add custom color schemes to this array
-    "schemes": [],
+    "schemes": [
+        {
+            "name": "Campbell",
+            "foreground": "#A7B191",
+            "background": "#0C0C0C",
+            "colors": [
+                "#0C0C0C",
+                "#C50F1F",
+                "#13A10E",
+                "#C19C00",
+                "#0037DA",
+                "#881798",
+                "#3A96DD",
+                "#CCCCCC",
+                "#767676",
+                "#E74856",
+                "#16C60C",
+                "#F9F1A5",
+                "#3B78FF",
+                "#B4009E",
+                "#61D6D6",
+                "#F2F2F2"
+            ]
+        },
+        {
+            "name": "Solarized Dark",
+            "foreground": "#FDF6E3",
+            "background": "#073642",
+            "colors": [
+                "#073642",
+                "#D30102",
+                "#859900",
+                "#B58900",
+                "#268BD2",
+                "#D33682",
+                "#2AA198",
+                "#EEE8D5",
+                "#002B36",
+                "#CB4B16",
+                "#586E75",
+                "#657B83",
+                "#839496",
+                "#6C71C4",
+                "#93A1A1",
+                "#FDF6E3"
+            ]
+        },
+        {
+            "name": "Solarized Light",
+            "foreground": "#073642",
+            "background": "#FDF6E3",
+            "colors": [
+                "#073642",
+                "#D30102",
+                "#859900",
+                "#B58900",
+                "#268BD2",
+                "#D33682",
+                "#2AA198",
+                "#EEE8D5",
+                "#002B36",
+                "#CB4B16",
+                "#586E75",
+                "#657B83",
+                "#839496",
+                "#6C71C4",
+                "#93A1A1",
+                "#FDF6E3"
+            ]
+        }
+    ],
 
     // Add any keybinding overrides to this array.
     // To unbind a default keybinding, set the command to "unbound"
     "keybindings": [
         {
             "command": "unbound",
-            "keys": ["f11"] 
+            "keys": ["f11"]
         }
     ]
 }
