@@ -289,6 +289,7 @@ nnoremap <leader>c :YcmCompleter GoTo<CR>
 nmap <silent> <leader>d <Plug>DashSearch
 
 map <leader><leader> <plug>NERDTreeTabsToggle<CR>
+map <leader>. :NERDTreeFind<CR>
 nmap <leader>t :TagbarToggle<CR>
 
 nmap <leader>g :13Gstatus<CR>
