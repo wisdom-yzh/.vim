@@ -46,9 +46,6 @@ autocmd Filetype phtml setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
 
-" leader键位设置
-let g:mapleader = ','
-
 " tab切换
 map <C-j> :tabp<CR>
 map <C-k> :tabn<CR>
@@ -96,18 +93,21 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 call plug#end()
 
 
-" 配色
+" color-schema
 syntax enable
 set t_Co=256
-let g:solarized_termcolors=256
+let g:solarized_termcolors = 256
+let g:solarized_visibility = "high"
+let g:solarized_termtrans = 1
+let g:solarized_contrast = "high"
 set background=dark
 colorscheme solarized
-" let g:solarized_termtrans=1
-" hi CursorLine cterm=underline ctermbg=none
-" hi Folded ctermbg=none
-" hi LineNr ctermbg=none
-" hi VertSplit ctermbg=none
-" hi StatusLineNC ctermbg=none
+let g:solarized_termtrans=1
+hi CursorLine cterm=underline ctermbg=none
+hi Folded ctermbg=none
+hi LineNr ctermbg=none
+hi VertSplit ctermbg=none
+hi StatusLineNC ctermbg=none
 
 " emmet
 let g:user_emmet_settings = {
@@ -131,11 +131,7 @@ let g:fzf_action = {
 let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 
-" FileList
-map <F3> <plug>NERDTreeTabsToggle<CR>
-
 " TagBar
-nmap <F2> :TagbarToggle<CR>
 let g:tagbar_type_javascript = {
             \ 'ctagsbin' : 'jsctags'
             \ }
@@ -153,11 +149,6 @@ let g:tagbar_type_typescript = {
             \ ]
             \ }
 
-" Git
-nmap <F6> :13Gstatus<CR>
-nmap <C-F6> :Gclog %<CR>
-nmap <S-F6> :Gblame<CR>
-
 " toggle location list and quick fix
 function! ToggleLocation()
     if exists("g:lwindow")
@@ -172,7 +163,6 @@ function! ToggleLocation()
         endtry
     endif
 endfunction
-nnoremap <script> <silent> <F4> :call ToggleLocation()<CR>
 
 " ctags
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
@@ -224,8 +214,8 @@ let g:ycm_semantic_triggers =  {
             \ 'typescript,javascript': ['re!\w{5}', '.'],
             \ 'c,cpp,php': ['.', '::', '->'],
             \ }
-" jump
-nnoremap <F12> :YcmCompleter GoTo<CR>
+
+let g:EditorConfig_max_line_indicator = "none"
 
 " supertab
 let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -241,6 +231,7 @@ let g:ale_linters = {
 \'html': [],
 \'javascript': ['eslint'],
 \'typescript': ['eslint', 'prettier', 'tsserver'],
+\'typescriptreact': ['eslint', 'prettier', 'tsserver'],
 \'python': ['pyflakes'],
 \'php': ['phpcs', 'phpmd'],
 \'c': [],
@@ -250,6 +241,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \'javascript': ['eslint'],
 \'typescript': ['eslint', 'prettier'],
+\'typescriptreact': ['eslint', 'prettier'],
 \'*': ['remove_trailing_lines', 'trim_whitespace']
 \}
 
@@ -277,9 +269,6 @@ let g:javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 'false'
 let g:jsx_ext_required = 0
 
-" dash 快捷键
-nmap <silent> <leader>d <Plug>DashSearch
-
 " markdown
 autocmd Filetype markdown nmap md <Plug>MarkdownPreview
 let g:mkdp_auto_start = 0
@@ -287,9 +276,23 @@ let g:mkdp_auto_close = 1
 
 " vimspector
 packadd! vimspector
-nmap <F5> <Plug>VimspectorContinue
-nmap <S-F5> <Plug>VimspectorStop
-nmap <F9> <Plug>VimspectorToggleBreakpoint
-nmap <F10> <Plug>VimspectorStepOver
-nmap <F11> <Plug>VimspectorStepInto
-nmap <S-F11> <Plug>VimspectorStepOut
+
+" leader key
+let g:mapleader = ','
+nmap <leader>r <Plug>VimspectorContinue
+nmap <leader><S-r> <Plug>VimspectorStop
+nmap <leader>b <Plug>VimspectorToggleBreakpoint
+nmap <leader>n <Plug>VimspectorStepOver
+nmap <leader>s <Plug>VimspectorStepInto
+nmap <leader><S-s> <Plug>VimspectorStepOut
+nnoremap <leader>c :YcmCompleter GoTo<CR>
+nmap <silent> <leader>d <Plug>DashSearch
+
+map <leader><leader> <plug>NERDTreeTabsToggle<CR>
+nmap <leader>t :TagbarToggle<CR>
+
+nmap <leader>g :13Gstatus<CR>
+nmap <leader><C-g> :Gclog %<CR>
+nmap <leader><S-g> :Gblame<CR>
+
+nnoremap <script> <silent> <leader>w :call ToggleLocation()<CR>
