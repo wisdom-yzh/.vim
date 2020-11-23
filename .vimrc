@@ -280,7 +280,7 @@ packadd! vimspector
 " leader key
 let g:mapleader = ','
 nmap <leader>r <Plug>VimspectorContinue
-nmap <leader><S-r> <Plug>VimspectorStop
+nmap <leader><S-r> :VimspectorReset<CR>
 nmap <leader>b <Plug>VimspectorToggleBreakpoint
 nmap <leader>n <Plug>VimspectorStepOver
 nmap <leader>s <Plug>VimspectorStepInto
@@ -288,7 +288,7 @@ nmap <leader><S-s> <Plug>VimspectorStepOut
 nnoremap <leader>c :YcmCompleter GoTo<CR>
 nmap <silent> <leader>d <Plug>DashSearch
 
-map <leader><leader> <plug>NERDTreeTabsToggle<CR>
+map <leader><leader> :NERDTreeToggle<CR>
 map <leader>. :NERDTreeFind<CR>
 nmap <leader>t :TagbarToggle<CR>
 
