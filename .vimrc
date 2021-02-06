@@ -286,6 +286,7 @@ nmap <leader>n <Plug>VimspectorStepOver
 nmap <leader>s <Plug>VimspectorStepInto
 nmap <leader><S-s> <Plug>VimspectorStepOut
 nnoremap <leader>c :YcmCompleter GoTo<CR>
+nnoremap <leader><S-c> :YcmCompleter GoToReferences<CR>
 nmap <silent> <leader>d <Plug>DashSearch
 
 map <leader><leader> :NERDTreeToggle<CR>
