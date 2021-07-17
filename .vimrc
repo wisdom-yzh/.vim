@@ -24,6 +24,10 @@ set laststatus=2            " 显示状态栏
 set backupcopy=yes          " 为了开启webpack-dev
 set lazyredraw
 set tags=./tags;,tags
+set updatetime=3000
+set nobackup
+set nowritebackup
+set hidden
 
 " 设置字符编码
 set encoding=utf-8
@@ -57,8 +61,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'w0rp/ale'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --ts-completer' }
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --ts-completer' }
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
@@ -70,11 +74,11 @@ Plug 'rizzatti/dash.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'chazy/cscope_maps'
-Plug 'ryanoasis/vim-webdevicons'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'Yggdroot/indentLine'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -90,8 +94,14 @@ Plug 'cakebaker/scss-syntax.vim'
 
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+Plug 'ryanoasis/vim-webdevicons'
 call plug#end()
 
+" coc
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <nul> coc#refresh()
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " color-schema
 syntax enable
@@ -128,7 +138,7 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 
 " bookmarks
-let g:bookmark_save_per_working_dir = 1
+let g:bookmark_save_per_working_dir = 0
 let g:bookmark_auto_save = 1
 
 " TagBar
@@ -196,24 +206,24 @@ set statusline+=%{gutentags#statusline_cb(
 
 " You Complete Me configure
 " autocomplete
-let g:ycm_global_ycm_extra_conf =  '~/.ycm_extra_conf.py'
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_filepath_completion_use_working_dir = 1
-let g:ycm_autoclose_preview_window_after_completion = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:ycm_complete_in_comments = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_goto_buffer_command = 'vertical-split'
-let g:ycm_semantic_triggers =  {
-            \ 'typescript,javascript': ['re!\w{5}', '.'],
-            \ 'c,cpp,php': ['.', '::', '->'],
-            \ }
+"let g:ycm_global_ycm_extra_conf =  '~/.ycm_extra_conf.py'
+"let g:ycm_add_preview_to_completeopt = 0
+"let g:ycm_show_diagnostics_ui = 1
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_filepath_completion_use_working_dir = 1
+"let g:ycm_autoclose_preview_window_after_completion = 0
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:ycm_complete_in_comments = 1
+"let g:ycm_collect_identifiers_from_comments_and_strings = 1
+"let g:ycm_seed_identifiers_with_syntax = 1
+"let g:ycm_goto_buffer_command = 'vertical-split'
+"let g:ycm_semantic_triggers =  {
+"            \ 'typescript,javascript': ['re!\w{5}', '.'],
+"            \ 'c,cpp,php': ['.', '::', '->'],
+"            \ }
 
 let g:EditorConfig_max_line_indicator = "none"
 
@@ -233,7 +243,6 @@ let g:ale_linters = {
 \'typescript': ['eslint', 'prettier', 'tsserver'],
 \'typescriptreact': ['eslint', 'prettier', 'tsserver'],
 \'python': ['pyflakes'],
-\'php': ['phpcs', 'phpmd'],
 \'c': [],
 \'cpp': []
 \}
@@ -279,22 +288,28 @@ packadd! vimspector
 
 " leader key
 let g:mapleader = ','
+" debugger
 nmap <leader>r <Plug>VimspectorContinue
 nmap <leader><S-r> :VimspectorReset<CR>
 nmap <leader>b <Plug>VimspectorToggleBreakpoint
 nmap <leader>n <Plug>VimspectorStepOver
 nmap <leader>s <Plug>VimspectorStepInto
 nmap <leader><S-s> <Plug>VimspectorStepOut
-nnoremap <leader>c :YcmCompleter GoTo<CR>
-nnoremap <leader><S-c> :YcmCompleter GoToReferences<CR>
-nmap <silent> <leader>d <Plug>DashSearch
-
+" coc
+nmap <silent> <leader>d :vsplit<CR><Plug>(coc-type-definition)
+nmap <silent> <leader>c :vsplit<CR><Plug>(coc-definition)
+nmap <silent> <leader><s-c> <Plug>(coc-references)
+nmap <silent> <leader><s-d> <Plug>(coc-implementation)
+"nnoremap <leader>c :YcmCompleter GoTo<CR>
+"nnoremap <leader><S-c> :YcmCompleter GoToReferences<CR>
+"nmap <silent> <leader>d <Plug>DashSearch
+" file lsit
 map <leader><leader> :NERDTreeToggle<CR>
 map <leader>. :NERDTreeFind<CR>
 nmap <leader>t :TagbarToggle<CR>
-
+" git
 nmap <leader>g :13Gstatus<CR>
 nmap <leader><C-g> :Gclog %<CR>
 nmap <leader><S-g> :Gblame<CR>
-
+" open location window
 nnoremap <script> <silent> <leader>w :call ToggleLocation()<CR>
